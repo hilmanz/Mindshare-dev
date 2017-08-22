@@ -1,0 +1,134 @@
+Country,Viewer Age Group,Viewer Gender,Viewer Percent
+Singapore,18-24,m,100.0
+United States,18-24,m,100.0
+Germany,55-64,m,100.0
+Indonesia,35-44,m,49.3
+Vietnam,13-17,m,39.9
+Malaysia,35-44,m,39.9
+Thailand,13-17,m,37.1
+India,55-64,m,36.3
+India,35-44,m,23.5
+India,25-34,m,23.2
+Vietnam,18-24,m,21.7
+Malaysia,13-17,f,13.5
+Malaysia,45-54,f,11.6
+Vietnam,18-24,f,10.6
+Indonesia,25-34,m,10.4
+Thailand,35-44,m,10.0
+Thailand,18-24,m,9.9
+Indonesia,45-54,m,9.1
+Malaysia,35-44,f,9.0
+Thailand,25-34,m,8.6
+Vietnam,13-17,f,8.3
+Vietnam,35-44,f,8.3
+Malaysia,25-34,m,8.3
+Indonesia,65-,m,8.1
+Indonesia,18-24,f,7.9
+Thailand,55-64,m,7.7
+Indonesia,13-17,m,7.7
+Indonesia,18-24,m,7.5
+Thailand,13-17,f,7.3
+Malaysia,18-24,m,6.8
+Thailand,45-54,m,6.5
+India,25-34,f,6.0
+Malaysia,25-34,f,5.8
+India,18-24,m,5.6
+Vietnam,25-34,m,5.6
+India,18-24,f,5.5
+Vietnam,25-34,f,5.5
+Thailand,25-34,f,5.4
+Malaysia,13-17,m,5.2
+Thailand,35-44,f,3.7
+Thailand,18-24,f,3.7
+Thailand,55-64,f,0.0
+Thailand,65-,f,0.0
+Thailand,45-54,f,0.0
+Thailand,65-,m,0.0
+India,55-64,f,0.0
+India,65-,f,0.0
+India,45-54,f,0.0
+India,35-44,f,0.0
+India,65-,m,0.0
+India,45-54,m,0.0
+India,13-17,m,0.0
+Vietnam,55-64,f,0.0
+Vietnam,65-,f,0.0
+Vietnam,55-64,m,0.0
+Vietnam,45-54,f,0.0
+Vietnam,65-,m,0.0
+Vietnam,35-44,m,0.0
+Vietnam,45-54,m,0.0
+Indonesia,55-64,f,0.0
+Indonesia,65-,f,0.0
+Indonesia,25-34,f,0.0
+Indonesia,55-64,m,0.0
+Indonesia,45-54,f,0.0
+Indonesia,35-44,f,0.0
+Malaysia,55-64,f,0.0
+Malaysia,65-,f,0.0
+Malaysia,55-64,m,0.0
+Malaysia,18-24,f,0.0
+Malaysia,65-,m,0.0
+Malaysia,45-54,m,0.0
+Philippines,55-64,f,0.0
+Philippines,65-,f,0.0
+Philippines,25-34,m,0.0
+Philippines,25-34,f,0.0
+Philippines,55-64,m,0.0
+Philippines,45-54,f,0.0
+Philippines,35-44,f,0.0
+Philippines,18-24,f,0.0
+Philippines,65-,m,0.0
+Philippines,35-44,m,0.0
+Philippines,45-54,m,0.0
+Philippines,18-24,m,0.0
+Philippines,13-17,m,0.0
+Singapore,55-64,f,0.0
+Singapore,65-,f,0.0
+Singapore,25-34,m,0.0
+Singapore,25-34,f,0.0
+Singapore,55-64,m,0.0
+Singapore,45-54,f,0.0
+Singapore,35-44,f,0.0
+Singapore,18-24,f,0.0
+Singapore,65-,m,0.0
+Singapore,35-44,m,0.0
+Singapore,45-54,m,0.0
+Singapore,13-17,m,0.0
+_unknown_,55-64,f,0.0
+_unknown_,65-,f,0.0
+_unknown_,25-34,m,0.0
+_unknown_,25-34,f,0.0
+_unknown_,55-64,m,0.0
+_unknown_,45-54,f,0.0
+_unknown_,35-44,f,0.0
+_unknown_,18-24,f,0.0
+_unknown_,65-,m,0.0
+_unknown_,35-44,m,0.0
+_unknown_,45-54,m,0.0
+_unknown_,18-24,m,0.0
+_unknown_,13-17,m,0.0
+United States,55-64,f,0.0
+United States,65-,f,0.0
+United States,25-34,m,0.0
+United States,25-34,f,0.0
+United States,55-64,m,0.0
+United States,45-54,f,0.0
+United States,35-44,f,0.0
+United States,18-24,f,0.0
+United States,65-,m,0.0
+United States,35-44,m,0.0
+United States,45-54,m,0.0
+United States,13-17,m,0.0
+Germany,55-64,f,0.0
+Germany,65-,f,0.0
+Germany,25-34,m,0.0
+Germany,25-34,f,0.0
+Germany,45-54,f,0.0
+Germany,35-44,f,0.0
+Germany,18-24,f,0.0
+Germany,65-,m,0.0
+Germany,35-44,m,0.0
+Germany,45-54,m,0.0
+Germany,18-24,m,0.0
+Germany,13-17,m,0.0

@@ -1,0 +1,56 @@
+<h3>Project List</h3>
+{if $msg}<p><font color="#FF0000">{$msg}</font></p>{/if}{if $ok}<p><font color="#00CC00">{$ok}</font></p>{/if}
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+  <tr>
+    <td class="head">
+		<strong>Project Name</strong>
+	</td>
+	<td class="head">
+		<strong>Start Date</strong>
+	</td>
+	<td class="head">
+		<strong>End Date</strong>
+	</td>
+	<td class="head">
+		<strong>SEO</strong>
+	</td>
+	<td class="head">
+		<strong>SEM</strong>
+	</td>
+	<td class="head">
+		<strong>Social</strong>
+	</td>
+	<td class="head">
+		<strong>Project Status</strong>
+	</td>
+	<td class="head">
+		<strong>Channel ID</strong>
+	</td>
+	<td class="head">
+		<strong>Description</strong>
+	</td>
+	<td class="head">
+		<strong>Action</strong>
+	</td>
+  </tr>
+  {section name=i loop=$pList}
+  <tr>
+	<td>{$pList[i].name}</td>
+	<td>{$pList[i].start_date}</td>
+	<td>{$pList[i].end_date}</td>
+	<td>{$pList[i].seo}</td>
+	<td>{$pList[i].sem}</td>
+	<td>{$pList[i].social}</td>
+	<td>{$pList[i].project_status}</td>
+	<td>{$pList[i].channel_id}</td>
+	<td>{$pList[i].description}</td>
+	<td>
+		<a href="index.php?s=project&act=edit-project&id={$pList[i].id}">Edit</a> 
+		{*}
+		| 
+		<a href="index.php?s=project&act=delete-project&id={$pList[i].id}" onclick="return confirm('Are you sure want to delete {$pList[i].name} Project?');">Delete</a>
+		{/*}
+	</td>
+  </tr>
+  {/section}
+</table>

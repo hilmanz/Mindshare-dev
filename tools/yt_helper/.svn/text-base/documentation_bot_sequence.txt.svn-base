@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cd /home/app/tools/yt_helper
+/usr/local/bin/php botyoutubebaru.php   //video raw for views, top country
+/usr/local/bin/php botchannel.php      // for subcriber
+/usr/local/bin/php botvideo.php       // maybe not in use
+/usr/local/bin/php botgeography.php    // for geography
+/usr/local/bin/php botdemography.php   // for demo graphy // gender age
+
+/usr/local/bin/php bot_daily_overall.php  // get daily views from botyoutube baru
+/usr/local/bin/php botsubscribber.php  //get from bot channel
+/usr/local/bin/php botdemogstats.php    // for demogstats top 10 demo
+/usr/local/bin/php botrafficsource.php 
+/usr/local/bin/php bottopcountry.php    // for top country from botyoutubebaru
+/usr/local/bin/php bottoptraffic.php

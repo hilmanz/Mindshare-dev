@@ -1,0 +1,141 @@
+<script type="text/javascript">
+	var page = "project";
+	var page_detail = "social";
+	var volumeChartData = {$volume};
+	var followerChartData = {$follower};
+	var sentimentChartData = {$sentiment};
+	
+	{literal}
+	$(document).ready(function() {
+		//Volume Chart
+		var category = volumeChartData.category;
+		var data = [{
+						name: 'Mentions',
+						data: volumeChartData.mentions
+					}, {
+						name: 'People',
+						data: volumeChartData.people
+					}, {
+						name: 'RTs',
+						data: volumeChartData.rts
+					}];
+		lineChart('twitter', category, data);
+		//Follower Chart
+		var category = followerChartData.category;
+		for (var x in followerChartData.follower)
+			var data = [{
+							name: x,
+							data: followerChartData.follower[x]
+						}];
+		lineChart('follower', category, data);
+		//Sentiment Pie Chart
+		var temp = [];
+		var _color = ['#008000','#FF0000','#808080'];
+		var i=0;
+		for (var x in sentimentChartData){
+			var data = {
+						name: x,
+						y: parseInt(sentimentChartData[x]),
+						color : _color[i]
+					};
+			temp.push(data);
+			i++;
+		}
+		pieChart('sentiment', category, temp);
+	});
+	{/literal}
+</script>
+<div id="body-tab">
+	{if $tabSEO eq 1}<a href="#" class="body-tab inblock bTabActive">SEO</a>{/if}
+	{if $tabSEM eq 1}<a href="#" class="body-tab inblock bTabActive">SEM</a>{/if}
+	{if $tabSOCIAL eq 1}<a href="#" class="body-tab inblock bTabActive">SOCIAL</a>{/if}
+</div>
+<div class="body-content">
+	<div class="body-content-head">
+		<span class="flLeft" style="font-size:14px;">Twitter</span>
+		
+		<div class="dropdown flRight fgrey2 arial relative" no="1">
+			<span>Twitter Account</span>
+			<div class="droplist1 dropdown-bg absolute transparent hide" style="top:6px;left:5px;">
+				<a class="dropdown-item" href="index.php?s=social&id={$userID}&act=twit">Twitter Account</a>
+				<hr>
+				<a class="dropdown-item" href="index.php?s=social&id={$userID}&act=fb">{$fbPageName}</a>
+				<hr>
+				<a class="dropdown-item" href="index.php?s=social&id={$userID}">Social Buzz</a>
+			</div>
+		</div>
+	</div>
+	<div style="border: 1px solid #999999;height: 65px;margin: 15px 0;padding: 18px;width: 920px;" class="radius-white bg-white">
+		<div class="radius-white flLeft" style="margin-right: 13px;margin-top:0;width:200px; background:#ccc;height: 45px;padding: 10px;">
+			<span class="arial" style="font-size:12px">Mentions</span><br>
+			<span style="font-size:28px">{$mentions|number_format}</span>
+		</div>
+		<div class="radius-white flLeft" style="margin-top:0;width:200px; background:#ccc;height: 45px;padding: 10px;">
+			<span class="arial" style="font-size:12px">Potential Impressions</span><br>
+			<span style="font-size:28px">{$potentialImpression|number_format}</span>
+		</div>
+		<div class="radius-white flRight" style="margin-top:0;width:200px; background:#ccc;height: 45px;padding: 10px;">
+			<span class="arial" style="font-size:12px">Retweets</span><br>
+			<span style="font-size:28px">{$retweet|number_format}</span>
+		</div>
+		<div class="radius-white flRight" style="margin-right: 13px;margin-top:0;width:200px; background:#ccc;height: 45px;padding: 10px;">
+			<span class="arial" style="font-size:12px">Unique People Engaged</span><br>
+			<span style="font-size:28px">{$uniquePeople|number_format}</span>
+		</div>
+	</div>
+	<span class="relative" style="font-size:14px;margin-top:10px;margin-left:2px;width: 300px;display: block;">
+		Volume
+	</span>
+	<div id="twitter" style="height: 292px;margin: 15px 0;"></div>
+	<span class="relative" style="font-size:14px;margin-top:10px;margin-left:2px;width: 300px;display: block;">
+		Followers
+	</span>
+	<div id="follower" style="height: 292px;margin: 15px 0;"></div>
+	<div style="height: 400px;">
+		<span class="relative" style="font-size:14px;margin-left:2px;width: 300px;display: block;margin-bottom:15px;">
+			Sentiment
+		</span>
+		<div id="sentiment" class="flLeft" style="width: 470px; height: 370px;margin: 0 0 20px 0;">
+		</div>
+		<span class="relative flRight" style="font-size:14px;margin-left:2px;margin-top: -33px;width: 468px;display: block;margin-bottom:15px;">
+			Wordcloud
+		</span>
+		<div id="wordcloud" class="wordcloud radius-white bg-white flRight" style="width:470px; height: 367px;margin-bottom: 21px;overflow:hidden;position:relative;">
+			{$wordcloud}			
+		</div>
+	</div>
+	<div style="height: 460px;">
+		<table class="body-tbl flLeft contentLeft  fgrey2" style="padding: 0;font-size: 11px; width:468px;">
+			<tbody>
+			<tr>
+				<th class="fgrey" colspan="11" style="border-top: 0;font-size: 14px;text-align: left;">
+					Top 10 Conversation
+				</th>
+			</tr>
+			<tr>
+				<th>Post</th>
+				<th>Reach</th>
+			</tr>
+			{section name=i loop=$conversation}
+			<tr><td>{$conversation[i].content}</td><td>{$conversation[i].followers}</td></tr>
+			{/section}
+			</tbody>
+		</table>
+		<table class="body-tbl flRight contentLeft  fgrey2" style="padding: 0;font-size: 11px; width:468px;">
+			<tbody>
+			<tr>
+				<th class="fgrey" colspan="11" style="border-top: 0;font-size: 14px;text-align: left;">
+					Top 10 Countries
+				</th>
+			</tr>
+			<tr>
+				<th>Countries</th>
+				<th>Reach</th>
+			</tr>
+			{section name=i loop=$location}
+			<tr><td>{$location[i].country_name}</td><td>{$location[i].mentions}</td></tr>
+			{/section}
+			</tbody>
+		</table>
+	</div>
+</div>

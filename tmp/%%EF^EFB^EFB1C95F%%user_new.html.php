@@ -1,0 +1,46 @@
+<?php /* Smarty version 2.6.13, created on 2012-06-20 13:12:23
+         compiled from common/admin/user_new.html */ ?>
+<p><strong>ADMINISTRATIVE ACCOUNTS</strong><br />
+  <br />
+<a class="backAccount" href="?s=admin&amp;r=users">&nbsp;</a> <br />
+<br />
+<form id="form1" name="form1" method="post" action="">
+  <table width="43%" border="0" cellpadding="0" cellspacing="0" class="list">
+    <tr>
+      <td class="head"><strong>Create Account</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Username</strong></td>
+    </tr>
+  
+  <tr>
+    <td><input name="username" type="text" id="username" value="<?php echo $this->_tpl_vars['rs']['username']; ?>
+" />
+      Max : 20 alphanumeric character(s) <br />
+      <span style="color:#FF0000;"><?php echo $this->_tpl_vars['rs']['e1']; ?>
+</span></td>
+  </tr>
+  <tr>
+    <td><strong>Password</strong></td>
+  </tr>
+  <tr>
+    <td><input type="password" name="password" id="password" /> 
+      Max : 10 alphanumeric character(s) <br /></td>
+  </tr>
+    <tr>
+    <td><strong>Confirm Password</strong></td>
+  </tr>
+  <tr>
+    <td><input type="password" name="confirm" id="confirm" /> 
+    Max : 10 alphanumeric character(s) <br />
+   <span style="color:#FF0000;"><?php echo $this->_tpl_vars['rs']['e2']; ?>
+</span></td>
+  </tr>
+  <tr>
+    <td><input type="submit" name="button" id="button" value="CREATE" />
+      <input name="s" type="hidden" id="s" value="admin" />
+      <input name="r" type="hidden" id="r" value="users" />
+      <input name="do" type="hidden" id="do" value="add" /></td>
+  </tr>
+  </table>
+</form>

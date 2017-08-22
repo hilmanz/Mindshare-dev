@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/Books
+END
+VolumeEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/Books/VolumeEntry.php
+END
+VolumeFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/Books/VolumeFeed.php
+END
+CollectionEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/Books/CollectionEntry.php
+END
+VolumeQuery.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/Books/VolumeQuery.php
+END
+CollectionFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/Books/CollectionFeed.php
+END

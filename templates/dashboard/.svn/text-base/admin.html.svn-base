@@ -1,0 +1,51 @@
+<script type="text/javascript">
+var project1 = "{$pro1}";
+var project2 = "{$pro2}";
+{literal}
+	$(document).ready(function() {
+		
+		if (page == "project"){
+			$("#main-control").show();
+		}else if(page == "main"){
+			$("#main-control").hide();
+			$("#header").css("height","65px");
+			$("#header").css("marginBottom","25px");
+		}
+		
+		if (page_detail == "seo"){
+			$("#projectName").html(project2);
+		}else if(page_detail == 'sem'){
+			$("#projectName").html(project1);
+		}
+	});
+{/literal}
+</script>
+<div id="header">
+		<div id="head-warp">
+			<div id="head-top">
+				<div id="head-left">
+					<a href="index.php">
+						<img src="images/logo.png" width="152" style="border:none;" />
+					</a>
+				</div>
+				<div id="head-right">
+					<span class="user-name">Welcome, {$user.username}</span>
+					<a href="logout.php" class="logout">Log Out</a>
+				</div>
+			</div>
+			<div id="main-control">
+				<div class="ctrl-left fgrey">
+					<span>{$pro1}</span><span style="margin:0 15px;">-</span><span>Status: Execution Phase</span>
+				</div>
+				<div class="ctrl-right">
+					<a href="index.php" class="project fgrey"><< Switch to a different project</a>
+				</div>
+			</div>
+		</div>
+	</div>
+<div id="body">
+	<div id="body-warp">
+		{$content}
+	</div>
+</div>
+<div id="footer" class="arial fgrey2">Copyright - Campaign Dashboard, Kana Cipta Media 2012</div>

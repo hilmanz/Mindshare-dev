@@ -1,0 +1,29 @@
+<form action="index.php?s=sem" method="post" enctype="multipart/form-data">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+  <tr>
+    <td width="12%" class="head"><strong>SEM CAMPAIGN</strong></td>
+    <td width="88%"><label for="project"></label>
+      <select name="project" id="project">
+        <option value="0">Select Project</option>
+        {if $plist}
+        {section name=i loop=$plist}
+        <option value="{$plist[i].id}" {if $project=='$plist[i].id'}selected{/if}}>{$plist[i].username} - {$plist[i].name}</option>
+        {/section}
+        {/if}
+      </select></td>
+  </tr>
+  <tr>
+  	<td width="12%" class="head"><strong>Excel</strong></td>
+    <td>
+    <input type="file" name="csv" id="csv" />
+    </td>
+ </tr>
+ <tr>
+ 	<td colspan="2">
+    <input type="submit" name="submit" />
+    <input type="hidden" name="upload_csv" value="1"/>
+    </td>
+ </tr>
+<br>
+<span>{$err}</span>
+</form>

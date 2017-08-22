@@ -1,0 +1,159 @@
+<?php
+	/* 
+		PROJECT MODEL
+		AUTHOR BABAR 
+		AND
+		@cendekiApp
+	*/
+	class ProjectModel extends SQLData{
+		function __construct($req){
+			parent::__construct();
+		}
+		
+		function getProjectList(){
+			$q= "SELECT p.*,u.username
+				FROM tbl_project p
+				LEFT JOIN gm_user u
+				ON u.userID = p.userID";
+			$this->open(0);
+			$r = $this->fetch($q,1);
+			$this->close();
+			return $r;
+		}
+		
+		function insertBudget($data){
+			$q = "INSERT INTO tbl_project_budget (id_project,budget) VALUES ('".$data['project']."','".$data['budget']."')";
+			$this->open(0);
+			$r = $this->query($q);
+			$this->close();
+			return $r;
+		}
+		
+		function getUser(){
+			$q=	"SELECT userID, username
+				FROM gm_user
+				WHERE userID > 1";
+			$this->open(0);
+			$r= $this->fetch($q,1);
+			$this->close();
+			return $r;
+		}
+		
+		function createProject($c){
+			$q= "INSERT INTO tbl_project (name, start_date, end_date, seo, sem, social, kpi, project_status, channel_id, description, userID) 
+				VALUES ('".$c['name']."','".$c['start']."','".$c['end']."',".$c['seo'].",".$c['sem'].",".$c['soc'].",".$c['kpi'].",".$c['proStats'].",'".$c['channel']."','".$c['proDesc']."',0)";
+			$this->open(0);
+			$r = $this->query($q);
+			$this->close();
+			return $r;
+		}
+		
+		function getCurrentProject($c){
+			$q=	"SELECT p.id
+				FROM tbl_project p
+				WHERE p.name = '".$c."'";
+			$this->open(0);
+			$r= $this->fetch($q);
+			$r= intval($r['id']);
+			$this->close();
+			return $r;
+		}
+		
+		function createProjectDetails($proID, $c, $user){
+			$this->open(0);
+			foreach($c as $key => $value){
+				$q= "INSERT INTO tbl_kpi (projectID, tipe, kpi, kpi_month, kpi_daily) 
+					VALUES (".$proID.",'".$key."',".$c[$key][0].",".$c[$key][1].",".$c[$key][2].")";
+				$r= $this->query($q);
+			}
+			foreach($user as $access){
+				$usrAccess = intval($access);
+				$usr=	"INSERT INTO tbl_project_user (user_id, project_id)
+						VALUES (".$usrAccess.",".$proID.")";
+				$uss= $this->query($usr);
+			}
+			
+			$this->close();
+			return $r;
+		}
+		
+		function deleteProject($proID){
+			$proID = intval($proID);
+			$this->open(0);
+			$d=	"DELETE FROM tbl_project
+				WHERE id=".$proID."";
+			$c= $this->query($d);
+			$this->close();
+			return $c;
+		}
+		
+		function getProjectData($proID){
+			$proID= intval($proID);
+			$this->open(0);
+			$g= "SELECT * 
+				FROM tbl_project
+				WHERE id = ".$proID."";
+			$c= $this->fetch($g);
+			$this->close();
+			return $c;
+		}
+		function getProjectKPI($proID){
+			$proID= intval($proID);
+			$this->open(0);
+			$g= "SELECT * 
+				FROM tbl_kpi
+				WHERE projectID = ".$proID."";
+			$c= $this->fetch($g,1);
+			$this->close();
+			foreach($c as $kpi){
+				$dataKPI[$kpi['tipe']] = array($kpi['kpi'],$kpi['kpi_month'],$kpi['kpi_daily']);
+			}
+			return $dataKPI;
+		}
+		
+		function getProjectAccess($proID){
+			$proID= intval($proID);
+			$this->open(0);
+			$g= "SELECT user_id
+				FROM tbl_project_user
+				WHERE project_id = ".$proID."";
+			$c= $this->fetch($g,1);
+			$this->close();
+			// var_dump($c);exit;
+			return $c;
+		}
+		
+		function updateProject($proID, $u){
+			$proID= intval($proID);
+			$this->open(0);
+			$project=	"UPDATE tbl_project
+						SET name='".$u['name']."', start_date='".$u['start']."',end_date='".$u['end']."',seo=".$u['seo'].",sem=".$u['sem'].",social=".$u['soc'].",kpi=".$u['kpi'].",project_status=".$u['proStats'].",channel_id='".$u['channel']."',description='".$u['proDesc']."',userID=0
+						WHERE id=".$proID."";
+			$r= $this->query($project);
+			// var_dump($project);exit;
+			$this->close();
+			return $r;
+		}
+		function updateProjectDetails($proID, $c, $user){
+			$this->open(0);
+			foreach($c as $key => $value){
+				$q= "UPDATE tbl_kpi
+					SET kpi=".$c[$key][0].",kpi_month=".$c[$key][1].",kpi_daily=".$c[$key][2]."
+					WHERE projectID=".$proID."
+					AND tipe='".$key."'";
+				$r= $this->query($q);
+				// var_dump($q);exit;
+			}
+			foreach($user as $access){
+				$usrAccess = intval($access);
+				$usr=	"UPDATE tbl_project_user
+						SET user_id=".$usrAccess."
+						WHERE project_id=".$proID."";
+				$uss= $this->query($usr);
+			}
+			
+			$this->close();
+			return $r;
+		}
+	}
+?>

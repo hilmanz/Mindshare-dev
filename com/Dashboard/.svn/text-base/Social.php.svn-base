@@ -1,0 +1,41 @@
+<?php
+global $ENGINE_PATH;
+include_once $ENGINE_PATH."Utility/Paginate.php";
+include_once APP_PATH."Dashboard/SocialModel.php";
+class Social extends SQLData{
+	var $model;
+	function __construct($req){
+		parent::SQLData();
+		$this->Request = $req;
+		$this->View = new BasicView();
+		$this->User = new UserManager();
+		$this->model = new SocialModel();
+	}
+	function admin(){
+		$id = $this->Request->getParam('id');
+		$act = $this->Request->getParam('act');
+		
+		if ($id == "9" && $act == null){
+			return $this->main();
+		}else if ($id == "9" && $act =="fb"){
+			return $this->fbDetail();
+		}else if ($id == "9" && $act =="twit"){
+			return $this->twitDetail();
+		}
+		
+	}
+
+	function main(){
+		$this->View->assign("page", "project");
+		return $this->View->toString("dashboard/social.html");
+	}
+	
+	function fbDetail(){
+		$this->View->assign("page", "project");
+		return $this->View->toString("dashboard/fb_detail.html");
+	}
+	function twitDetail(){
+		$this->View->assign("page", "project");
+		return $this->View->toString("dashboard/twit_detail.html");
+	}
+}

@@ -1,0 +1,419 @@
+<script type="text/javascript">
+	var page = "project";
+	var kpi = {$kpi};
+	var kpiPerHari = {$kpiHari};
+	var kpiPerWeeks = {$kpiWeeks};
+	var views = {$view};
+	var so = {$so};
+	var weekly = {$weekly}
+	var countries = {$countries};
+	var monthly = {$monthly};
+	{literal}
+		var chart;
+		$(document).ready(function() {
+			
+			// VIEWS CHART
+			_category = [];
+			_views = [];
+			_kpi= [];
+			_name = views[0].channel_name;
+			for (var i=0;i<views.length;i++){
+				var year = (views[i].date).substr(0,4);
+				var month = (views[i].date).substr(5,2);
+				var tgl = (views[i].date).substr(8,2);
+				_category.push(tgl+"/"+month+"/"+year);
+				_views.push(parseInt(views[i].views));
+				_kpi.push(kpiPerHari);
+			}
+			
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'views',
+					type: 'line',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},
+				title: false,
+				subtitle: false,
+				xAxis: {
+					categories: _category
+				},
+				yAxis: {
+					title:false,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					formatter: function() {
+							return '<b>'+ this.series.name +'</b><br/>'+
+							this.x +': '+ this.y;
+					}
+				},
+				legend: false,
+				credits: false,
+				series: [{
+					name: 'KPI',
+					color: '#f26522',
+					data: _kpi
+				}, {
+					name: 'Views',
+					color: '#75f222',
+					data: _views
+				}]
+			});
+			
+			//MONTH
+			_category = [];
+			_monthly = [];
+			_kpi= [];
+			_bulan= [null,"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+			for (var i=0;i<monthly.length;i++){
+				var year = (so[i].date).substr(0,4);
+				var month = parseInt((monthly[i].month).substr(5,2));	
+				var _month = _bulan[month];
+				_category.push(_month+" "+year);
+				_monthly.push(parseInt(monthly[i].view_month));
+				_kpi.push(parseInt(kpi));
+			}
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'month',
+					zoomType: 'xy',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},			
+				title: false,
+				xAxis: {
+					categories: _category
+				},
+				yAxis: {
+					title:false,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				legend: false,
+				credits: false,
+				tooltip: {
+					formatter: function() {
+							return '<b>'+ this.x +'</b><br/>'+
+							Highcharts.numberFormat(this.y,0);
+					}
+				},
+				labels: false,
+				series: [{
+					type: 'column',
+					name: 'Month on Month',
+					color: '#75f222',
+					data: _monthly
+				}, {
+					type: 'spline',
+					color: '#f26522',
+					name: 'KPI',
+					data: _kpi
+				}]
+			});
+			
+			//TOP COUNTRIES
+			_category = [];
+			_countries = [];
+			for (var i=0;i<countries.length;i++){
+				_category.push(countries[i].country);
+				_countries.push(parseInt(countries[i].views));
+			}
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'dailyStats',
+					zoomType: 'xy',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},			
+				title: false,
+				xAxis: {
+					categories: _category,
+					labels: {
+						style: {
+							fontSize: '9px'
+						}
+					}
+				},
+				yAxis: {
+					title:false,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				legend: false,
+				credits: false,
+				tooltip: {
+					formatter: function() {
+							return '<b>'+ this.x +'</b><br/>'+
+							Highcharts.numberFormat(this.y,0);
+					}
+				},
+				labels: false,
+				series: [{
+					type: 'column',
+					name: _category,
+					color: '#a864a8',
+					data: _countries
+				}]
+			});
+			
+			//WEEKLY STATS
+			_category = [];
+			_views = [];
+			_kpi= [];
+			for (var i=0;i<weekly.length;i++){
+				_category.unshift(weekly[i].week);
+				_views.unshift(parseInt(weekly[i].views));
+				_kpi.push(kpiPerWeeks);
+			}
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'weeklyStats',
+					zoomType: 'xy',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},			
+				title: false,
+				xAxis: {
+					categories: _category,
+					labels: {
+						style: {
+							fontSize: '10px'
+						}
+					}
+				},
+				yAxis: {
+					title:false,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				legend: false,
+				credits: false,
+				tooltip: {
+					formatter: function() {
+							return '<b>'+ this.series.name +'</b><br/>'+
+							Highcharts.numberFormat(this.y,0);
+					}
+				},
+				labels: false,
+				series: [{
+					type: 'column',
+					name: 'Weekly Stats',
+					color: '#03b6e6',
+					data: _views
+				}, {
+					type: 'spline',
+					color: '#f26522',
+					name: 'KPI',
+					data: _kpi
+				}]
+			});
+			
+			//SUBSCRIBE OVERTIME
+			_category = [];
+			_subscribe = [];
+			_name = so[0].channel_name;
+			for (var i=0;i<so.length;i++){
+				var year = (so[i].date).substr(0,4);
+				var month = (so[i].date).substr(5,2);
+				var tgl = (so[i].date).substr(8,2);
+				_category.push(tgl+"/"+month+"/"+year);
+				_subscribe.push(parseInt(so[i].subscribe));
+			}
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'subscribe',
+					type: 'line',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},
+				title: false,
+				subtitle: false,
+				xAxis: {
+					categories: _category
+				},
+				yAxis: {
+					title:false,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					formatter: function() {
+							return '<b>'+ this.series.name +'</b><br/>'+
+							this.x +': '+ Highcharts.numberFormat(this.y,0);
+					}
+				},
+				legend: false,
+				credits: false,
+				series: [{
+					name: 'YouTube',
+					color: '#a864a8',
+					data: _subscribe
+				}]
+			});
+		});
+	{/literal}
+</script>
+<div id="body-tab">
+	<a href="index.php?s=seo&id=1" class="body-tab inblock">SEO</a>
+	<a href="index.php?s=sem&id=1" class="body-tab inblock">SEM</a>
+	<a href="#" class="body-tab inblock bTabActive">SOCIAL</a>
+</div>
+<div class="body-content" style="height: 1240px;">
+	<div class="body-content-head">
+		<span class="flLeft" style="font-size:14px;">SOCIAL REPORT</span>
+		<div id="socDropdown" class="dropdown flRight fgrey arial relative">
+			<span>SOCIAL REPORT</span>
+			<div id="socList" class="dropdown-bg absolute transparent hide" style="top:6px;left:5px;">
+				<a class="dropdown-item" href="index.php?s=social&id=1">SOCIAL REPORT</a>
+				<hr>
+				<a class="dropdown-item" href="index.php?s=social&id=1&act=fb">FACEBOOK REPORT</a>
+				<hr>
+				<a class="dropdown-item" href="index.php?s=social&id=1&act=twit">TWITTER REPORT</a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	{literal}
+		$("#socDropdown").click(function(){
+			effect();
+		});
+		function effect(){
+			$("#socList").toggle("blind",300);
+		}
+	{/literal}
+	</script>
+	<div class="summary-stats">
+		<div class="twitter-stats embos">
+			<div class="entry">
+				<h1>TWITTER</h1>
+				<div class="blackbox">
+					<h3 id="twmention" class="blue">45,354</h3>
+					<span class="arial">Mention</span>
+				</div><!-- end.blackbox -->
+				<div class="blackbox">
+					<h3 id="twimp" class="blue">534M</h3>
+					<span class="arial">Impression</span>
+				</div><!-- end.blackbox -->
+				<div class="blackbox nomargin">
+					<h3 id="twpeople" class="blue">23K</h3>
+					<span class="arial">People</span>
+				</div><!-- end.blackbox -->
+			</div><!-- end.entry -->
+		</div><!-- end.twitter-stats -->
+		<div class="facebook-stats embos">
+			<div class="entry">
+				<h1>FACEBOOK</h1>
+				<div class="blackbox">
+					<h3 id="fblikes" class="purple">46</h3>
+					<span class="arial">Likes</span>
+				</div><!-- end.blackbox -->
+				<div class="blackbox">
+					<h3 id="fbposts" class="purple">4K</h3>
+					<span class="arial">Stories</span>
+				</div><!-- end.blackbox -->
+				<div class="blackbox nomargin">
+					<h3 id="fbviews" class="purple">542K</h3>
+					<span class="arial">Views</span>
+				</div><!-- end.blackbox -->
+			</div><!-- end.entry -->
+		</div><!-- end.facebook-stats -->
+	</div>
+	<span class="relative" style="font-size:14px;margin-left:2px;width: 300px;display: block;">
+		TWITTER & FACEBOOK
+		<div class="absolute" style="top:0;right: -659px;">
+			<span class="legend-green arial">Actual</span>
+			<span class="legend-orange arial">KPI</span>
+		</div>
+	</span>
+	<div id="views" class="body-chart-big"></div>
+	<span class="relative" style="font-size:14px;margin-left:2px;width: 300px;display: block;margin-bottom:15px;">
+		SENTIMENT
+	</span>
+	<div class="title flLeft">
+		<div class="box embos">
+			<div class="chartpie" id="pie"><div class="highcharts-container" id="highcharts-0" style="position: relative; overflow: hidden; width: 450px; height: 340px; text-align: left; line-height: normal; font-family: &quot;Lucida Grande&quot;,&quot;Lucida Sans Unicode&quot;,Verdana,Arial,Helvetica,sans-serif; font-size: 12px; left: -0.5px; top: -0.700012px; cursor: auto;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="450" height="340"><defs/><g class="highcharts-series-group" zIndex="3"/><path d="M 153.1679906035153 20.523850131878355 C 158.1679906035153 20.523850131878355 161.25301910340931 27.905083033964686 165.49493329076356 38.05427827433339 L 169.7368474781178 48.2034735147021" fill="none" stroke-width="1" stroke="#ffffff" visibility="visible" zIndex="3" transform="translate(10,10)"/><path d="M 105.01245213528145 53.07367154175185 C 110.01245213528145 53.07367154175185 115.71152173947314 58.6879930187051 123.5477424452367 66.40768504951582 L 131.38396315100024 74.12737708032654" fill="none" stroke-width="1" stroke="#ffffff" visibility="visible" zIndex="3" transform="translate(10,10)"/><path d="M 277.0233185982955 292.39603291133 C 272.0233185982955 292.39603291133 268.92790520534305 285.01914902131716 264.67171179003344 274.87593367254954 L 260.41551837472383 264.7327183237819" fill="none" stroke-width="1" stroke="#ffffff" visibility="visible" zIndex="3" transform="translate(10,10)"/><g class="highcharts-shadow" zIndex="4" transform="translate(10,10)"><path d="M 214.97609385771628 39.12500243452031 A 117.375 117.375 0 1 1 131.26041608391475 74.25297749729225 L 215 156.5 A 0 0 0 1 0 215 156.5 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="5" stroke-linejoin="round" isShadow="true" stroke-opacity="0.05" transform="translate(1,1)"/><path d="M 214.97609385771628 39.12500243452031 A 117.375 117.375 0 1 1 131.26041608391475 74.25297749729225 L 215 156.5 A 0 0 0 1 0 215 156.5 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-linejoin="round" isShadow="true" stroke-opacity="0.1" transform="translate(1,1)"/><path d="M 214.97609385771628 39.12500243452031 A 117.375 117.375 0 1 1 131.26041608391475 74.25297749729225 L 215 156.5 A 0 0 0 1 0 215 156.5 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1" stroke-linejoin="round" isShadow="true" stroke-opacity="0.15000000000000002" transform="translate(1,1)"/></g><g class="highcharts-shadow" zIndex="4" transform="translate(10,10)"><path d="M 131.26049833097915 74.25289375774943 A 117.375 117.375 0 0 1 131.5075336091564 74.00212923369564 L 215 156.5 A 0 0 0 0 0 215 156.5 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="5" stroke-linejoin="round" isShadow="true" stroke-opacity="0.05" transform="translate(1,1)"/><path d="M 131.26049833097915 74.25289375774943 A 117.375 117.375 0 0 1 131.5075336091564 74.00212923369564 L 215 156.5 A 0 0 0 0 0 215 156.5 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-linejoin="round" isShadow="true" stroke-opacity="0.1" transform="translate(1,1)"/><path d="M 131.26049833097915 74.25289375774943 A 117.375 117.375 0 0 1 131.5075336091564 74.00212923369564 L 215 156.5 A 0 0 0 0 0 215 156.5 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1" stroke-linejoin="round" isShadow="true" stroke-opacity="0.15000000000000002" transform="translate(1,1)"/></g><g class="highcharts-shadow" zIndex="4" transform="translate(10,10)"><path d="M 131.50761610706894 74.00204574127049 A 117.375 117.375 0 0 1 214.95422605350723 39.12500892547075 L 215 156.5 A 0 0 0 0 0 215 156.5 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="5" stroke-linejoin="round" isShadow="true" stroke-opacity="0.05" transform="translate(1,1)"/><path d="M 131.50761610706894 74.00204574127049 A 117.375 117.375 0 0 1 214.95422605350723 39.12500892547075 L 215 156.5 A 0 0 0 0 0 215 156.5 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-linejoin="round" isShadow="true" stroke-opacity="0.1" transform="translate(1,1)"/><path d="M 131.50761610706894 74.00204574127049 A 117.375 117.375 0 0 1 214.95422605350723 39.12500892547075 L 215 156.5 A 0 0 0 0 0 215 156.5 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1" stroke-linejoin="round" isShadow="true" stroke-opacity="0.15000000000000002" transform="translate(1,1)"/></g><g class="highcharts-point" zIndex="5" transform="translate(10,10)"><path d="M 214.97609385771628 39.12500243452031 A 117.375 117.375 0 1 1 131.26041608391475 74.25297749729225 L 215 156.5 A 0 0 0 1 0 215 156.5 Z" fill="#4572A7" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round"/><path d="M 214.97609385771628 39.62500243452031 A 117.375 117.375 0 1 1 131.26041608391475 74.75297749729225 L 215 157 A 0 0 0 1 0 215 157 Z" fill="rgb(192,192,192)" isTracker="1334717752580" fill-opacity="0.000001" visibility="visible" zIndex="1" style="cursor:pointer;"/></g><g class="highcharts-point" zIndex="5" transform="translate(10,10)"><path d="M 131.26049833097915 74.25289375774943 A 117.375 117.375 0 0 1 131.5075336091564 74.00212923369564 L 215 156.5 A 0 0 0 0 0 215 156.5 Z" fill="#AA4643" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round"/><path d="M 131.26049833097915 74.75289375774943 A 117.375 117.375 0 0 1 131.5075336091564 74.50212923369564 L 215 157 A 0 0 0 0 0 215 157 Z" fill="rgb(192,192,192)" isTracker="1334717752580" fill-opacity="0.000001" visibility="visible" zIndex="1" style="cursor:pointer;"/></g><g class="highcharts-point" zIndex="5" transform="translate(10,10)"><path d="M 131.50761610706894 74.00204574127049 A 117.375 117.375 0 0 1 214.95422605350723 39.12500892547075 L 215 156.5 A 0 0 0 0 0 215 156.5 Z" fill="#89A54E" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round"/><path d="M 131.50761610706894 74.50204574127049 A 117.375 117.375 0 0 1 214.95422605350723 39.62500892547075 L 215 157 A 0 0 0 0 0 215 157 Z" fill="rgb(192,192,192)" isTracker="1334717752580" fill-opacity="0.000001" visibility="visible" zIndex="1" style="cursor:pointer;"/></g><g class="highcharts-data-labels" visibility="visible" zIndex="6" transform="translate(10,10)"><text x="282.0233185982955" y="297.39603291133" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#ffffff;line-height:14px;fill:#ffffff;" text-anchor="start" zIndex="1" visibility="visible"><tspan x="282.0233185982955">positive</tspan><tspan dy="14" x="282.0233185982955">87.4 %</tspan></text><text x="100.01245213528145" y="58.07367154175185" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#ffffff;line-height:14px;fill:#ffffff;" text-anchor="end" zIndex="1" visibility="visible"><tspan x="100.01245213528145">negative</tspan><tspan dy="14" x="100.01245213528145">0.0 %</tspan></text><text x="148.1679906035153" y="25.523850131878355" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:11px;color:#ffffff;line-height:14px;fill:#ffffff;" text-anchor="end" zIndex="1" visibility="visible"><tspan x="148.1679906035153">netral</tspan><tspan dy="14" x="148.1679906035153">12.6 %</tspan></text></g><g zIndex="8" style="padding:0;white-space:nowrap;" visibility="hidden" transform="translate(138,227)"><rect rx="5" ry="5" fill="none" x="0" y="0" width="107" height="30" stroke-width="5" fill-opacity="0.85" anchorX="0" anchorY="0" isShadow="true" stroke="rgb(0, 0, 0)" stroke-opacity="0.05" transform="translate(1,1)"/><rect rx="5" ry="5" fill="none" x="0" y="0" width="107" height="30" stroke-width="3" fill-opacity="0.85" anchorX="0" anchorY="0" isShadow="true" stroke="rgb(0, 0, 0)" stroke-opacity="0.1" transform="translate(1,1)"/><rect rx="5" ry="5" fill="none" x="0" y="0" width="107" height="30" stroke-width="1" fill-opacity="0.85" anchorX="0" anchorY="0" isShadow="true" stroke="rgb(0, 0, 0)" stroke-opacity="0.15000000000000002" transform="translate(1,1)"/><rect rx="5" ry="5" fill="rgb(255,255,255)" x="0" y="0" width="107" height="30" stroke-width="2" fill-opacity="0.85" anchorX="0" anchorY="0" stroke="#4572A7"/><text x="5" y="18" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Verdana, Arial, Helvetica, sans-serif;font-size:12px;color:#333333;fill:#333333;" zIndex="1"><tspan style="font-weight:bold" x="5">positive</tspan><tspan dx="3">: 87.4 %</tspan></text></g><g class="highcharts-tracker" zIndex="9" transform="translate(10,10)"/><g class="highcharts-legend" zIndex="10"><rect rx="5" ry="5" fill="none" x="0.5" y="0.5" width="9" height="0" stroke-width="1" stroke="#909090" visibility="hidden"/></g></svg></div></div>
+		</div><!-- end.cart-half -->
+	</div>
+	<span class="relative flRight" style="font-size:14px;margin-left:2px;margin-top: -33px;width: 468px;display: block;margin-bottom:15px;">
+		WORLDCLOUD
+	</span>
+	<div class="title flRight">
+		<div class="wordcloud flRight">
+			<img src="images/wordcloud.png">
+		</div><!-- end.cart-half -->
+	</div>
+	<span class="relative flLeft" style="font-size:14px;margin-left:2px;margin-bottom: 15px;width: 800px;display: block;">
+		INFLUENCERS
+	</span>
+	<div class="title flLeft">
+		<div class="box embos height233">
+			<div class="headergreen">FANS</div>
+			<div id="twfans" style="padding: 20px 25px 15px; height:163px;">
+				<div class="box-profile flLeft">
+					<img src="http://a3.twimg.com/profile_images/1551322176/P.Octiviani_20Andria_normal.jpg" />
+					<div class="box-name">chelseageby<br>+104</div>
+				</div>
+				<div class="box-profile flLeft">
+					<img src="http://a2.twimg.com/profile_images/1534228496/cde28404-d513-487f-abc8-38a1220297ee_normal.png">
+					<div class="box-name">icha_coco<br>+66</div>
+				</div>
+				<div class="box-profile flLeft">
+					<img src="http://a0.twimg.com/profile_images/1538367474/100_1174_normal.JPG">
+					<div class="box-name">dwirezeki<br>+52</div>
+				</div>
+				<div class="hr flLeft"></div>
+				<div class="box-profile flLeft">
+					<img src="http://a1.twimg.com/profile_images/1540820208/AHA_Soulnation_AvaTW_FA1_normal.jpg">
+					<div class="box-name">aha_moments<br>+51</div>
+				</div>
+				<div class="box-profile flLeft">
+					<img src="http://a0.twimg.com/profile_images/1551705305/531_normal.jpg">
+					<div class="box-name">alifiaaR<br>+48</div>
+				</div>
+				<div class="box-profile flLeft">
+					<img src="http://a1.twimg.com/profile_images/1554646156/djuleee_normal.jpg">
+					<div class="box-name">djuleee<br>+47</div>
+				</div>
+			</div>
+		</div><!-- end.cart-half -->
+	</div>
+	<div class="title flRight">
+		<div class="box embos height233">
+			<div class="headerred">HATERS</div>
+			<div id="twhaters" style="padding: 20px 25px 15px; height:163px;"><div class="box-profile"><img src="http://a0.twimg.com/profile_images/929402696/tujuhlangit-small_normal.png"><div class="box-name">7LangitApps<br>--2</div></div><div class="box-profile"><img src="http://a1.twimg.com/profile_images/1540844778/iseng_normal.jpg"><div class="box-name">tonyworker<br>--1</div></div><div class="box-profile"><img src="http://a3.twimg.com/profile_images/1548241438/d89c21516be122d1b8101a74dac25750eabcdefg_normal.jpg"><div class="box-name">manda_mande<br>--1</div></div><div class="hr"></div><div class="box-profile"><img src="http://a0.twimg.com/profile_images/1535447811/326295352_normal.jpg"><div class="box-name">JakBBNews<br>--1</div></div><div class="box-profile"><img src="http://a3.twimg.com/profile_images/1398327750/307908900_normal.jpg"><div class="box-name">dinnalatas<br>--1</div></div><div class="box-profile"><img src="http://a2.twimg.com/profile_images/1327318488/arin1_normal.jpg"><div class="box-name">arinikusuma<br>--1</div></div></div>
+			
+		</div><!-- end.cart-half -->
+	</div>
+</div>

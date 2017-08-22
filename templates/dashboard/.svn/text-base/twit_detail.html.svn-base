@@ -1,0 +1,82 @@
+<script type="text/javascript">
+	var page = "project";
+</script>
+<div id="body-tab">
+	<a href="#" class="body-tab inblock">SEO</a>
+	<a href="index.php?s=sem&id=1" class="body-tab inblock">SEM</a>
+	<a href="#" class="body-tab inblock bTabActive">SOCIAL</a>
+</div>
+<div class="body-content" style="height: 1550px;">
+	<div class="body-content-head">
+		<span class="flLeft" style="font-size:14px;">TWITTER REPORT</span>
+		<div id="socDropdown" class="dropdown flRight fgrey arial relative">
+			<span>TWITTER REPORT</span>
+			<div id="socList" class="dropdown-bg absolute transparent hide" style="top:6px;left:5px;">
+				<a class="dropdown-item" href="index.php?s=social&id=1&act=twit">TWITTER REPORT</a>
+				<hr>
+				<a class="dropdown-item" href="index.php?s=social&id=1">SOCIAL REPORT</a>
+				<hr>
+				<a class="dropdown-item" href="index.php?s=social&id=1&act=fb">FACEBOOK REPORT</a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	{literal}
+		$("#socDropdown").click(function(){
+			effect();
+		});
+		function effect(){
+			$("#socList").toggle("blind",300);
+		}
+	{/literal}
+	</script>
+	<div class="summary-stats height135">
+		<div class="twitter-stats flLeft embos height100 width100p">
+			<div class="entry">
+				<div class="blackbox marginx">
+					<h3 id="twimp" class="blue">534M</h3>
+					<span class="arial">Impressions</span>
+				</div><!-- end.blackbox -->
+				<div class="blackbox  marginx">
+					<h3 id="twrt" class="blue">2K</h3>
+					<span class="arial">Retweets</span>
+				</div><!-- end.blackbox -->
+				<div class="blackbox marginx">
+					<h3 id="twmention" class="blue">45,354</h3>
+					<span class="arial">Mentions</span>
+				</div><!-- end.blackbox -->
+				<div class="blackbox marginx">
+					<h3 id="twrtimp" class="blue">3M</h3>
+					<span class="arial">Retweet Impressions</span>
+				</div><!-- end.blackbox -->
+				<div class="blackbox nomargin">
+					<h3 id="twtotalimp" class="blue">537M</h3>
+					<span class="arial">Total Impressions</span>
+				</div><!-- end.blackbox -->
+			</div><!-- end.entry -->
+		</div><!-- end.twitter-stats -->	
+	</div>
+	<span class="relative" style="font-size:14px;margin-left:2px;width: 300px;display: block;">
+		TWITTER STATS
+		<div class="absolute" style="top:0;right: -659px;">
+			<span class="legend-blue arial">MENTIONS</span>
+			<span class="legend-orange arial">IMPRESSION</span>
+			<span class="legend-green arial">PEOPLE</span>
+		</div>
+	</span>
+	<div id="views" class="body-chart-big"></div>
+	<div class="row">
+		<div class="title flLeft">
+			<div class="box2 embos">
+				<div class="tweethead"><h3>TOP 10 TWEETS</h3></div>
+				<div id="twcontent" class="tweetfeed"><div class="light"><div class="pic"><img src="http://a1.twimg.com/profile_images/1540473809/326475609_normal.jpg"></div><div class="feed"><span><strong>vidialdiano</strong></span><br><span>Goodluck kakak! RT @ninokayam: RT @Rayi_Putra: @ranforyourlife di soulnation fest, istora senayan jam 17.30. Don't miss it! See y'all!</span><br></div></div><div class="dark"><div class="pic"><img src="http://a1.twimg.com/profile_images/1100463014/PIN3_normal.jpg"></div><div class="feed"><span><strong>detikcom</strong></span><br><span>Hari Ini Festival Java Soulnation 2011 Mulai Digelar di Istora Senayan http://de.tk/g66me via @rollingstoneINA</span><br></div></div><div class="light"><div class="pic"><img src="http://a2.twimg.com/profile_images/789978708/01_metro_blackberry_01_normal.jpg"></div><div class="feed"><span><strong>ksmactweet</strong></span><br><span>Java Soulnation Festival Usung Tribute To Amy Winehouse http://t.co/k4EY3Gqe</span><br></div></div><div class="dark"><div class="pic"><img src="http://a3.twimg.com/profile_images/272819437/512_normal.png"></div><div class="feed"><span><strong>kompasdotcom</strong></span><br><span>NOW: Saksikan Live Streaming Java Soulnation Festival di http://kom.ps/0XPa</span><br></div></div><div class="light"><div class="pic"><img src="http://a2.twimg.com/profile_images/1530476110/image_normal.jpg"></div><div class="feed"><span><strong>gadiiing</strong></span><br><span>Soulnation RT @BenMangunsong: Off air ya Masbro? RT @gadiiing: 20.30 be there!!! RT @banyubiru_: Eh sob, SOB itu ... http://t.co/19mvZXse</span><br></div></div><div class="dark"><div class="pic"><img src="http://a2.twimg.com/profile_images/1527396129/image_normal.jpg"></div><div class="feed"><span><strong>MoMo_GEISHA</strong></span><br><span>RT @nardgeisha: Baiklah..dua hari ini saya ga bs nntn soulnation! kesal</span><br></div></div><div class="light"><div class="pic"><img src="http://a0.twimg.com/profile_images/1538232050/cover_BM_normal.jpg"></div><div class="feed"><span><strong>GlennFredly</strong></span><br><span>Beres makan di warteg enak bgt,sekarang menuju Soulnation festival..dapet banget nih soul-nya..#wartegsoulful</span><br></div></div><div class="dark"><div class="pic"><img src="http://a1.twimg.com/profile_images/1540885652/IMG_5175_normal.jpg"></div><div class="feed"><span><strong>pevpearce</strong></span><br><span>RT @ninokayam: Don't forget to come &amp; watch @sayhivi performing live @ Tebs stage, Java Soulnation today 18:00!</span><br></div></div><div class="light"><div class="pic"><img src="http://a2.twimg.com/profile_images/1430652214/Profile_pic_twit_normal.jpg"></div><div class="feed"><span><strong>VIVAnews</strong></span><br><span>Java Soulnation Festival Kenang Amy Winehouse http://t.co/T4J4Ue0a</span><br></div></div><div class="dark"><div class="pic"><img src="http://a2.twimg.com/profile_images/1461904759/rianti4_normal.jpg"></div><div class="feed"><span><strong>riantic</strong></span><br><span>Tweeps ada yg tau gak beli ticket soulnation buat hari sabtu dimana? Thanks in advance</span><br></div></div></div>
+			</div><!-- end.cart-half -->
+		</div>
+		<div class="title flRight" style="width:470px;">
+			<h3 class="margin6">WORDCLOUD</h3>
+			<div class="wordcloud flRight">
+				<img src="images/wordcloud.png">
+			</div><!-- end.cart-half -->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/mindshare-dashboard/!svn/ver/101/trunk/templates/dashboard/admin/SEM
+END
+upload-sem-report.html
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/mindshare-dashboard/!svn/ver/66/trunk/templates/dashboard/admin/SEM/upload-sem-report.html
+END
+upload_csv_keyword.html
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/mindshare-dashboard/!svn/ver/101/trunk/templates/dashboard/admin/SEM/upload_csv_keyword.html
+END
+upload_csv_ads.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/mindshare-dashboard/!svn/ver/101/trunk/templates/dashboard/admin/SEM/upload_csv_ads.html
+END

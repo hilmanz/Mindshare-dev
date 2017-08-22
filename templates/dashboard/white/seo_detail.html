@@ -1,0 +1,107 @@
+<script type="text/javascript">
+	var page = "project";
+</script>
+<div id="body-tab">
+	{if $tabSEO eq 1}<a href="#" class="body-tab inblock bTabActive">SEO</a>{/if}
+	{if $tabSEM eq 1}<a href="#" class="body-tab inblock bTabActive">SEM</a>{/if}
+	{if $tabSOCIAL eq 1}<a href="#" class="body-tab inblock bTabActive">SOCIAL</a>{/if}
+</div>
+<div class="body-content" style="height: 1550px;">
+	<div class="body-content-head">
+		<span class="flLeft" style="font-size:14px;">DETAIL REPORT</span>
+		<div id="seoDropdown" class="dropdown flRight fgrey arial relative">
+			<span>DETAIL REPORT</span>
+			<div id="seoList" class="dropdown-bg absolute transparent hide" style="top:6px;left:5px;">
+				<a class="dropdown-item" href="index.php?s=seo&id={$projectID}&act=detail">DETAIL REPORT</a>
+				<hr>
+				<a class="dropdown-item" href="index.php?s=seo&id={$projectID}">SUMMARY REPORT</a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	{literal}
+		$("#seoDropdown").click(function(){
+			effect();
+		});
+		function effect(){
+			$("#seoList").toggle("blind",300);
+		}
+	{/literal}
+	</script>
+	<table class="body-content fgrey2" style=" margin-top: 15px;padding: 0;font-size: 10px;">
+		<tr><th class="fgrey" colspan="11" style="border-top: 0;font-size: 14px;text-align: left;">LOCATIONS & AGE BY VIEWS</th></tr>
+		<tr class="fcyan">
+			<th>COUNTRY</th>
+			<th>VIEWS</th>
+			<th>13-17 YEARS</th>
+			<th>18-24 YEARS</th>
+			<th>25-34 YEARS</th>
+			<th>35-44 YEARS</th>
+			<th>45-54 YEARS</th>
+			<th>55-64 YEARS</th>
+			<th>65+ YEARS</th>
+			<th>GENDER MALE</th>
+			<th>GENDER FEMALE</th>
+		</tr>
+		{section name=i loop=$demograp}
+		<tr>
+			<td>{$demograp[i].country}</td>
+			<td>{$demograp[i].country_views|number_format}</td>
+			{section name=j loop=$demograp[i].PercentPerAge}
+			<td>{$demograp[i].PercentPerAge[j]|number_format:2}%</td>
+			{/section}
+			<td>{$demograp[i].MalePercent|number_format:2}%</td>
+			<td>{$demograp[i].FemalePercent|number_format:2}%</td>
+		</tr>
+		{/section}
+		
+	</table>
+	<table class="body-content flLeft contentLeft fgrey2" style=" margin-top: 15px;padding: 0;font-size: 10px; width:468px;">
+		<tr><th class="fgrey" colspan="11" style="border-top: 0;font-size: 14px;text-align: left;">DAILY VIEWS</th></tr>
+		<tr class="fcyan">
+			<th>DATE</th>
+			<th>VIEWS</th>
+			<th>TARGET</th>
+		</tr>
+		{section name=i loop=$daily}
+		<tr><td>{$daily[i].date}</td><td>{$daily[i].views|number_format}</td><td>{$daily[i].target}</td></tr>
+		{/section}
+		<tr class="fcyan">
+			<th>TOTAL</th>
+			<th style="text-align: right;">{$totViews|number_format}</th>
+			<th style="text-align: right;">{$totKPI|number_format:2}</th>
+		</tr>
+	</table>
+	<div class="flRight" style="width;468px;">
+		<table class="body-content contentLeft fgrey2" style="margin-top: 15px;padding: 0;font-size: 10px; width:468px;">
+			<tr><th class="fgrey" colspan="11" style="border-top: 0;font-size: 14px;text-align: left;">TRAFFIC SOURCES</th></tr>
+			<tr class="fcyan">
+				<th>CHANNEL</th>
+				<th>VIEWS</th>
+				<th>PCT.</th>
+			</tr>
+			{section name=i loop=$top_traffic}
+			<tr><td>{$top_traffic[i].source}</td><td>{$top_traffic[i].views|number_format}</td><td>{$top_traffic[i].percent|number_format:2}%</td></tr>
+			{/section}
+		</table>
+		<table class="body-content contentLeft fgrey2" style="margin-top: 15px;padding: 0;font-size: 10px; width:468px;">
+			<tr><th class="fgrey" colspan="11" style="border-top: 0;font-size: 14px;text-align: left;">TOTAL VIEW</th></tr>
+			<tr class="fcyan">
+				<th>WEEKLY VIEWS</th>
+				<th>VIEWS</th>
+				<th>TARGET</th>
+			</tr>
+			{section name=i loop=$weekly}
+			<tr><td>{$weekly[i].weeks}</td><td>{$weekly[i].views|number_format}</td><td>{$weekly[i].target|number_format}</td></tr>
+			{/section}
+			<tr class="fcyan">
+				<th>MONTHLY VIEWS</th>
+				<th>VIEWS</th>
+				<th>TARGET</th>
+			</tr>
+			{section name=i loop=$monthly}
+			<tr><td>{$monthly[i].month}</td><td>{$monthly[i].views|number_format}</td><td>{$monthly[i].target|number_format}</td></tr>
+			{/section}
+		</table>
+	</div>
+</div>

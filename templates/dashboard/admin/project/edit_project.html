@@ -1,0 +1,183 @@
+<script type="text/javascript">
+var start = "{$pData.start_date}";
+var end = "{$pData.end_date}";
+{literal}
+	$(document).ready(function() {
+		$("#startDate, #endDate").datepicker();
+		$("#startDate, #endDate").datepicker("option", "dateFormat", "yy-mm-dd");
+		
+		$("#startDate").val(start);
+		$("#endDate").val(end);
+	});
+{/literal}
+</script>
+
+<h3>Edit Project</h3>
+{if $msg}<p><font color="#FF0000">{$msg}</font></p>{/if}{if $ok}<p><font color="#00CC00">{$ok}</font></p>{/if}
+<form method="post" name="fproject" action="index.php?s=project&act=update-project&id={$projID}">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+  <tr>
+    <td width="12%" class="head">
+		<strong>Project Name</strong>
+	</td>
+    <td width="88%">
+		<label for="projectName"></label>
+		<input type="text" name="projectName" id="projectName" value="{$pData.name}">
+	</td>
+  </tr>
+  <tr>
+    <td width="12%" class="head">
+		<strong>Duration</strong>
+	</td>
+    <td width="88%">
+		<label for="startDate"></label>
+		<input type="text" name="startDate" id="startDate" value="">
+		-
+		<label for="endDate"></label>
+		<input type="text" name="endDate" id="endDate" value="">
+	</td>
+  </tr>
+  <tr>
+    <td width="12%" class="head">
+		<strong>Reporting Type</strong>
+	</td>
+    <td width="88%">
+		<label for="seo"></label>
+		<input type="checkbox" name="seo" id="seo" value="1" {if $pData.seo eq '1'}checked="true"{/if}/> SEO 
+		<input type="checkbox" name="sem" id="sem" value="1" {if $pData.sem eq '1'}checked="true"{/if}/> SEM
+		<input type="checkbox" name="social" id="social" value="1" {if $pData.social eq '1'}checked="true"{/if}/> SOCIAL
+	</td>
+  </tr>
+  <tr>
+    <td width="12%" class="head">
+		<strong>Status</strong>
+	</td>
+    <td width="88%">
+		<label for="projectStatus"></label>
+		<select name="projectStatus" id="projectStatus">
+			<option value="0" {if $pData.project_status eq '0'}selected{/if}>Select Status</option>
+			<option value="1" {if $pData.project_status eq '1'}selected{/if}>Execution Phase</option>
+			<option value="2" {if $pData.project_status eq '2'}selected{/if}>Completed</option>
+		</select>
+	</td>
+  </tr>
+   <tr>
+    <td width="12%" class="head">
+		<strong>Youtube Channel<br>(if any)</strong>
+	</td>
+    <td width="88%">
+		<label for="projectChannel"></label>
+		<input type="text" name="projectChannel" id="projectChannel" value="{$pData.channel_id}">
+	</td>
+  </tr>
+   <tr>
+    <td width="12%" class="head">
+		<strong>Description</strong>
+	</td>
+    <td width="88%">
+		<label for="projectDesc"></label>
+		<input type="text" name="projectDesc" id="projectDesc" value="{$pData.description}">
+	</td>
+  </tr>
+</table>
+
+<h3>KPI</h3>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+   <tr>
+    <td width="12%">
+	</td>
+    <td width="10%"  class="head">
+		<strong>Total KPI</strong>
+	</td>
+	<td width="10%"  class="head">
+		<strong>Monthly KPI</strong>
+	</td>
+	<td width="63%"  class="head">
+		<strong>Daily KPI</strong>
+	</td>
+  </tr>
+  <tr>
+    <td width="12%" class="head">
+		<strong>Click</strong>
+	</td>
+    <td width="10%">
+		<label for="clickTot"></label>
+		<input type="text" name="clickTot" id="clickTot" value="{$pKPI.click[0]}">
+	</td>
+	<td width="10%">
+		<label for="clickMonth"></label>
+		<input type="text" name="clickMonth" id="clickMonth" value="{$pKPI.click[1]}">
+	</td>
+	<td width="63%">
+		<label for="clickDaily"></label>
+		<input type="text" name="clickDaily" id="clickDaily" value="{$pKPI.click[2]}">
+	</td>
+  </tr>
+  <tr>
+    <td width="12%" class="head">
+		<strong>Budget</strong>
+	</td>
+    <td width="10%">
+		<label for="budgetTot"></label>
+		<input type="text" name="budgetTot" id="budgetTot" value="{$pKPI.budget[0]}">
+	</td>
+	<td width="10%">
+		<label for="budgetMonth"></label>
+		<input type="text" name="budgetMonth" id="budgetMonth" value="{$pKPI.budget[1]}">
+	</td>
+	<td width="63%">
+		<label for="budgetDaily"></label>
+		<input type="text" name="budgetDaily" id="budgetDaily" value="{$pKPI.budget[2]}">
+	</td>
+  </tr>
+  <tr>
+    <td width="12%" class="head">
+		<strong>CTR</strong>
+	</td>
+    <td width="10%">
+		<label for="ctrTot"></label>
+		<input type="text" name="ctrTot" id="ctrTot" value="{$pKPI.ctr[0]}">
+	</td>
+	<td width="10%">
+		<label for="ctrMonth"></label>
+		<input type="text" name="ctrMonth" id="ctrMonth" value="{$pKPI.ctr[1]}">
+	</td>
+	<td width="63%">
+		<label for="ctrDaily"></label>
+		<input type="text" name="ctrDaily" id="ctrDaily" value="{$pKPI.ctr[2]}">
+	</td>
+  </tr>
+</table>
+
+<h3>USER ACCESS</h3>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list" style="margin-bottom:12px;">
+	<tr>
+		<td width="12%" class="head">
+			<strong>Username</strong>
+		</td>
+		<td width="88%" class="head">
+			<strong>Permission</strong>
+		</td>
+	</tr>
+	{section name=i loop=$userList}
+		<tr>
+			<td width="12%">
+				<span>{$userList[i].username}</span>
+			</td>
+			<td width="88%">
+				<input type="checkbox" name="projectAccess[]" id="projectAccess[]" value="{$userList[i].userID}" 
+				{section name=j loop=$pUsr}
+					{if $userList[i].userID eq $pUsr[j].user_id}
+					checked
+					{/if}
+				{/section}	
+				>
+			</td>
+		</tr>	
+	{/section}
+</table>
+<input name="update" type="hidden" value="1">
+<input type="submit" name="submit" id="submit" value="Update">
+<input type="reset" name="reset" id="reset" value="Reset">
+
+</form>

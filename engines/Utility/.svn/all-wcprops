@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility
+END
+ntlm_sasl_client.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/ntlm_sasl_client.php
+END
+Mobile_Detect.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/Mobile_Detect.php
+END
+CSVPrinter.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/CSVPrinter.php
+END
+digest_sasl_client.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/digest_sasl_client.php
+END
+CaptchaUtil.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/CaptchaUtil.php
+END
+basic_sasl_client.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/basic_sasl_client.php
+END
+sasl.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/sasl.php
+END
+cram_md5_sasl_client.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/cram_md5_sasl_client.php
+END
+PHPExcel.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/PHPExcel.php
+END
+PHPExcelWrapper.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/PHPExcelWrapper.php
+END
+Mailer.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/Mailer.php
+END
+FileUploader.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/FileUploader.php
+END
+SessionManager.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/SessionManager.php
+END
+Browser.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/Browser.php
+END
+RequestManager.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/RequestManager.php
+END
+Thumbnail.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/Thumbnail.php
+END
+plain_sasl_client.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/plain_sasl_client.php
+END
+smtp.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/smtp.php
+END
+Debugger.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/Debugger.php
+END
+Paginate.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/Paginate.php
+END
+login_sasl_client.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mindshare-dashboard/!svn/ver/2/trunk/engines/Utility/login_sasl_client.php
+END

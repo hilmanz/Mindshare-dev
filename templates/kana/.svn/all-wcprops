@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana
+END
+footer.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana/footer.html
+END
+loginbox.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana/loginbox.html
+END
+register.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana/register.html
+END
+meta.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana/meta.html
+END
+userbox.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana/userbox.html
+END
+header.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana/header.html
+END
+home.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana/home.html
+END
+login.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana/login.html
+END
+master.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/mindshare-dashboard/!svn/ver/2/trunk/templates/kana/master.html
+END

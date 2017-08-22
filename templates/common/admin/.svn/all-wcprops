@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/mindshare-dashboard/!svn/ver/100/trunk/templates/common/admin
+END
+dashboard_config.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/dashboard_config.html
+END
+modules-list.html
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/modules-list.html
+END
+pages-edit.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/pages-edit.html
+END
+user_edit.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/user_edit.html
+END
+default.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mindshare-dashboard/!svn/ver/118/trunk/templates/common/admin/default.html
+END
+exportTo.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/exportTo.html
+END
+message.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/message.html
+END
+pages-add.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/pages-add.html
+END
+user_manage.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/user_manage.html
+END
+user_new.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/user_new.html
+END
+dashboard.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/dashboard.html
+END
+permission.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/permission.html
+END
+admin.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/mindshare-dashboard/!svn/ver/118/trunk/templates/common/admin/admin.html
+END
+modules-edit.html
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/modules-edit.html
+END
+dialog.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/dialog.html
+END
+login.dummy.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/login.dummy.html
+END
+broadcast.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/broadcast.html
+END
+config.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/config.html
+END
+paging.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/paging.html
+END
+dashboard_panel.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/dashboard_panel.html
+END
+login.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/login.html
+END
+pages-list.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/pages-list.html
+END
+edit_config.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/mindshare-dashboard/!svn/ver/2/trunk/templates/common/admin/edit_config.html
+END

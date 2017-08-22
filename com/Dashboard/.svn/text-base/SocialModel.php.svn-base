@@ -1,0 +1,14 @@
+<?php
+/** MODEL DATA 
+ ** @cendekiApp
+ **/
+class SocialModel extends SQLData{
+	function __construct($req){
+		parent::SQLData();
+		$this->Request = $req;
+		$this->View = new BasicView();
+		$this->User = new UserManager();
+	}
+	
+	
+}

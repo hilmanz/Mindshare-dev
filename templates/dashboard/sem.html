@@ -1,0 +1,690 @@
+<script type="text/javascript">
+	var page = "project";
+	var page_detail = "sem";
+	var clicks = {$clickPerday};
+	var kpiperday = {$kpiClick};
+	var cpcperday = {$cpcPerDay};
+	var ctrperday = {$ctrPerDay};
+	var searchdisplay = {$searchdisplay};
+	var expenditure = {$expenditure};
+	var assets = {$assets};
+	var maxChart = {$maxCPC};
+	{literal}
+	$(document).ready(function() {
+		// Clicks CHART
+		_category = [];
+		_clicks = [];
+		_kpi= [];
+		if (clicks != null){
+			for (var i=0;i<clicks.length;i++){
+				var year = (clicks[i].range_date).substr(0,4);
+				var month = (clicks[i].range_date).substr(5,2);
+				var tgl = (clicks[i].range_date).substr(8,2);
+				_category.push(tgl+"/"+month+"/"+year);
+				_clicks.push(parseInt(clicks[i].clicks));
+				_kpi.push(kpiperday);
+			}
+		}
+		
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'clicks',
+				type: 'line',
+				marginTop: 50,
+				marginBottom: 25,
+				zoomType: 'xy'
+			},
+			title: false,
+			subtitle: false,
+			xAxis: {
+				categories: _category,
+				labels: {
+					formatter: function() {
+						return (clicks.length > 12 ? '' : this.value);
+					}
+				}
+			},
+			yAxis: {
+				title:false,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			},
+			tooltip: {
+				formatter: function() {
+						return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': '+ this.y;
+				}
+			},
+			legend: false,
+			credits: false,
+			series: [{
+				name: 'KPI',
+				color: '#f26522',
+				data: _kpi
+			}, {
+				name: 'Clicks',
+				color: '#75f222',
+				data: _clicks
+			}]
+		});
+		
+		//CLICK VS CPC
+		_category = [];
+		_clicks = [];
+		_cpc= [];
+		var maxCPC = 0.1;
+		var totCPC;
+		if (clicks != null){
+			var param = clicks.length;
+			for (var i=0;i<clicks.length;i++){
+				var year = (clicks[i].range_date).substr(0,4);
+				var month = (clicks[i].range_date).substr(5,2);
+				var tgl = (clicks[i].range_date).substr(8,2);
+				_category.push(tgl+"/"+month+"/"+year);
+				_clicks.push(parseInt(clicks[i].clicks));
+				_cpc.push(parseFloat(cpcperday[i].avg_cpc));
+				totCPC =+ parseFloat(cpcperday[i].avg_cpc);
+				//alert(cpcperday[i].avg_cpc);
+			}
+		}
+		maxCPC = (totCPC/param)+maxCPC;
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'clickvscpc',
+				type: 'line',
+				marginTop: 30,
+				marginLeft: 60,
+				marginBottom: 40,
+				marginRight: 60,
+				zoomType: 'xy'
+			},
+			title: false,
+			subtitle: false,
+			xAxis: [{
+				categories: _category,
+				labels: {
+					formatter: function() {
+						return (clicks.length > 12 ? '' : this.value);
+					}
+				}
+			}],
+			credits: false,
+			yAxis: [
+			        {
+			        // Primary yAxis - CPC
+					max: maxChart,
+			        labels: {
+					formatter: function() {
+						return this.value;
+					},
+					style: {
+						color: '#f26522'
+					}
+				},
+				title: false
+			}, { // Secondary yAxis - Click
+				title: false,
+				labels: {
+					formatter: function() {
+						return this.value;
+					},
+					style: {
+						color: '#75f222'
+					}
+				},
+				opposite: true
+			}],
+			tooltip: {
+				formatter: function() {
+					return ''+
+						this.x +': '+ Highcharts.numberFormat(this.y) +
+						(this.series.name == 'Click' ? ' Clicks' : ' CPC');
+				}
+			},
+			legend:false,
+			series: [{
+				name: 'Click',
+				color: '#75f222',
+				type: 'column',
+				yAxis: 1,
+				data: _clicks
+
+			}, {
+				name: 'CPC',
+				color: '#f26522',
+				type: 'spline',
+				data: _cpc
+			}]
+		});
+		
+		//Consolidated CTR Performance
+		
+		_category = [];
+		_daymonth = [];
+		_ctrperday = [];
+		_ctrtarget= [];
+		if (ctrperday != null){
+			for (var i=0;i<ctrperday.length;i++){
+				var year = (ctrperday[i].range_date).substr(0,4);
+				var month = (ctrperday[i].range_date).substr(5,2);
+				var tgl = (ctrperday[i].range_date).substr(8,2);
+				_category.push(tgl+"/"+month+"/"+year);
+				_daymonth.push(tgl+"/"+month);
+				_ctrperday.push(parseFloat(ctrperday[i].ctrs));
+				_ctrtarget.push(parseFloat(ctrperday[i].ctr_target));
+			}
+		}
+		
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'ctrperday',
+				type: 'line',
+				marginTop: 30,
+				marginLeft: 55,
+				marginBottom: 40,
+				marginRight: 25,
+				zoomType: 'xy'
+			},
+			title: false,
+			subtitle: false,
+			xAxis: {
+				categories: _daymonth,
+				labels: {
+					formatter: function() {
+						return (ctrperday.length > 10 ? '' : this.value);
+					}
+				}
+			},
+			yAxis: {
+				title:false,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			},
+			tooltip: {
+				formatter: function() {
+						return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': '+ Highcharts.numberFormat(this.y)+' %';
+				}
+			},
+			legend: false,
+			credits: false,
+			series: [{
+				name: 'CTR Target',
+				color: '#f26522',
+				data: _ctrtarget
+			}, {
+				name: 'CTR',
+				color: '#03b6e6',
+				data: _ctrperday
+			}]
+		});
+		
+		//SEARCH AND DISPLAY
+		_category = ["Display", "Search"];
+		_clicks = [];
+		_ctr= [];
+		if (searchdisplay == null){
+			
+		}else{
+			for (var i=0;i<searchdisplay.length;i++){
+				_clicks.push(parseFloat(searchdisplay[i].clicks));
+				_ctr.push(parseFloat(searchdisplay[i].ctr));
+			}
+		}
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'searchdisplay',
+				type: 'line',
+				marginTop: 30,
+				marginLeft: 60,
+				marginBottom: 40,
+				marginRight: 60,
+				zoomType: 'xy'
+			},
+			title: false,
+			subtitle: false,
+			xAxis: [{
+				categories: _category
+			}],
+			credits: false,
+			yAxis: [{ // Primary yAxis
+				min: 0,
+				labels: {
+					formatter: function() {
+						return this.value;
+					},
+					style: {
+						color: '#F26522'
+					}
+				},
+				title: false
+			}, { // Secondary yAxis
+				title: {
+					text: false,
+					style: {
+						color: '#03B6E6'
+					}
+				},
+				labels: {
+					formatter: function() {
+						return this.value;
+					},
+					style: {
+						color: '#03B6E6'
+					}
+				},
+				opposite: true
+			}],
+			tooltip: {
+				formatter: function() {
+					return ''+
+						this.x +': '+ Highcharts.numberFormat(this.y) +
+						(this.series.name == 'Click' ? ' Clicks' : ' %');
+				}
+			},
+			legend:false,
+			series: [{
+				name: 'Click',
+				color: '#03B6E6',
+				type: 'column',
+				yAxis: 1,
+				data: _clicks
+
+			}, {
+				name: 'CPC',
+				color: '#F26522',
+				type: 'spline',
+				data: _ctr
+			}]
+		});
+		
+		//Expenditure
+		_category = [];
+		_daymonth = [];
+		_expenditure = [];
+		_budget = [];
+		if (expenditure != null){
+			for (var i=0;i<expenditure.length;i++){
+				var year = (expenditure[i].range_date).substr(0,4);
+				var month = (expenditure[i].range_date).substr(5,2);
+				var tgl = (expenditure[i].range_date).substr(8,2);
+				_category.push(tgl+"/"+month+"/"+year);
+				_daymonth.push(tgl+"/"+month);
+				_expenditure.push(parseFloat(expenditure[i].costperhari));
+				_budget.push(parseFloat(expenditure[i].budget));
+			}
+		}
+		
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'expenditure',
+				type: 'line',
+				marginTop: 30,
+				marginLeft: 55,
+				marginBottom: 40,
+				marginRight: 25,
+				zoomType: 'xy'
+			},
+			title: false,
+			subtitle: false,
+			xAxis: {
+				categories: _daymonth,
+				labels: {
+					formatter: function() {
+						return (expenditure.length > 10 ? '' : this.value);
+					}
+				}
+			},
+			yAxis: {
+				title:false,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			},
+			tooltip: {
+				formatter: function() {
+						return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': '+ Highcharts.numberFormat(this.y);
+				}
+			},
+			legend: false,
+			credits: false,
+			series: [{
+				name: 'Cost per Day',
+				color: '#a864a8',
+				data: _expenditure
+			}, {
+				name: 'Daily Budget',
+				color: '#F26522',
+				type: 'spline',
+				data: _budget
+			}]
+		});
+		
+		//Assets Chart
+		_category = [];
+		_assets = [];
+		_paid = [];
+		_all = [];
+		_cat_xAxis = [];
+		if (assets.paid_search != null){
+			for(var i=0;i<assets.paid_search.length;i++){
+				/*
+				var year = (assets.paid_search[i].datee).substr(0,4);
+				var month = (assets.paid_search[i].datee).substr(5,2);
+				var tgl = (assets.paid_search[i].datee).substr(8,2);
+				_category.push(tgl+"/"+month+"/"+year);
+				if (i==0){
+					_cat_xAxis.push(tgl+"/"+month+"/"+year);	
+				}else if (i == (assets.paid_search.length-1)){
+					_cat_xAxis.push(tgl+"/"+month+"/"+year);
+				}else{
+					_cat_xAxis.push("");
+				}
+				*/
+				_paid.push(parseInt(assets.paid_search[i].visits));		 
+			}
+			//alert(_cat_xAxis);
+			for(var i=0;i<assets.all_search.length;i++){
+				var year = (assets.all_search[i].datee).substr(0,4);
+				var month = (assets.all_search[i].datee).substr(5,2);
+				var tgl = (assets.all_search[i].datee).substr(8,2);
+				_category.push(tgl+"/"+month+"/"+year);
+				if (i==0){
+					_cat_xAxis.push(tgl+"/"+month+"/"+year);	
+				}else if (i == (assets.all_search.length-1)){
+					_cat_xAxis.push(tgl+"/"+month+"/"+year);
+				}else{
+					_cat_xAxis.push("");
+				}
+				_all.push(parseInt(assets.all_search[i].visits));
+			}
+		}else{
+			$("#nodata_asset").show();
+		}
+		
+		//alert(assets.all_search.length);
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'weeklyStats',
+				type: 'area',
+				marginTop: 30,
+				marginLeft: 55,
+				marginBottom: 40,
+				marginRight: 25,
+				zoomType: 'xy'
+			},
+			title:false,
+			legend: false,
+			subtitle: false,
+			xAxis: {
+				categories : _category,
+				labels: {
+					formatter: function() {
+						return ''; // clean, unformatted number for year
+					}
+				}
+			},
+			yAxis: {
+				title: false,
+				labels: {
+					formatter: function() {
+						return this.value / 1000 +'k';
+					}
+				}
+			},
+			tooltip: {
+				formatter: function() {
+					return this.series.name +' <b>'+
+						Highcharts.numberFormat(this.y, 0) +'</b><br/>in <b>'+ this.x +'</b>';
+				}
+			},
+			credits: false,
+			plotOptions: {
+				area: {
+					marker: {
+						enabled: false,
+						symbol: 'circle',
+						radius: 2,
+						states: {
+							hover: {
+								enabled: true
+							}
+						}
+					}
+				}
+			},
+			series: [{
+				name: 'All Traffic',
+				color: '#F26522',
+				data: _all
+			},{
+				name: 'Paid Search',
+				color: '#A864A8',
+				data: _paid
+			}]
+		});
+	{/literal}
+		//initial Date
+		var startD = "{$startD}";
+		var endD = "{$endD}";
+		var min7 = new Date("{$min7}");
+		var startDate = new Date("{$startDate}");
+		var currDate = new Date("{$currDate}");
+	{literal}
+		function mdy(x){
+			return (x.getMonth()+1)+"/"+x.getDate()+"/"+x.getFullYear();
+		}
+		if( startD == "//" && endD == "//"){
+			$("#from").val(mdy(min7));
+			$("#to").val(mdy(currDate));
+		}else if(startD == "//" && endD != "//"){
+			$("#from").val(mdy(startDate));
+			$("#to").val(endD);
+		}else if(startD != "//" && endD == "//"){
+			$("#from").val(startD);
+			$("#to").val(mdy(currDate));
+		}else{
+			$("#from").val(startD);
+			$("#to").val(endD);
+		}
+		$("#from, #to").datepicker({ minDate: startDate, maxDate: currDate });
+		$("#from, #to").datepicker("option", "dateFormat", "dd/mm/yy" );
+	
+		//toolTip
+		$('.tooltip').poshytip({
+				className: 'tip-twitter',
+				showTimeout: 1,
+				alignTo: 'target',
+				alignX: 'center',
+				offsetY: 5
+			});
+
+	});
+	{/literal}
+</script>
+<div id="body-tab">
+	{if $tabSEO eq 1}<a href="#" class="body-tab inblock bTabActive">SEO</a>{/if}
+	{if $tabSEM eq 1}<a href="#" class="body-tab inblock bTabActive">SEM</a>{/if}
+	{if $tabSOCIAL eq 1}<a href="#" class="body-tab inblock bTabActive">SOCIAL</a>{/if}
+	<div class="flRight fgrey2 arial">Last Report on Generated on <span class="fwhite bold">{$lastUpdate}</span></div>
+</div>
+<div class="body-content">
+	<div class="body-content-head">
+		<span class="flLeft" style="font-size:14px;">ADWORDS REPORT</span>
+		
+		<div id="semDropdown" class="dropdown2 flRight fgrey arial relative">		
+		<form action="index.php?s=sem&id={$id}" method="post">
+			<span class="absolute" style="left: -60px;top: 10px;">Duration:</span>
+			<input type="text" id="from" name="from" class="absolute">		
+			<input type="text" id="to" name="to" class="absolute" style="left:111px">
+			<input type="hidden" id="rangeDate" name="rangeDate" class="fLeft" value="1">
+			<input id="semDuration" type="submit" class="absolute" value="">
+		</form>
+		</div>
+		
+	</div>
+	<div class="body-box-summary-small flLeft relative" style="z-index:1;">
+		<span class="flLeft" style="font-size:14px;margin-left:2px;margin-bottom: 12px;width:300px;">TRAFFIC</span>
+		<div class="summary-box-small2 flLeft relative">
+			<span class="arial" style="font-size:12px">Clicks to Date</span><br>
+			<span  style="font-size:28px">{$clickFromStart.click|number_format}</span>
+			<span class="absolute arial bold" style="right: 13px;top: 9px;">{$clickFromStart.percent|number_format:2}%</span>
+			<a href="#" class="absolute tooltip" title="The total clicks your ad receives since the campaign started to date.
+The percentage shows the sum of Clicks to Date divided by KPI multiplied by 100." style=" bottom: 5px;right: 10px;"></a>
+		</div>
+		<div class="summary-box-small2 flRight relative">
+			<span class="arial" style="font-size:12px">Clicks This Month</span><br>
+			<span  style="font-size:28px">{$clickThisMonth.click|number_format}</span>
+			<span class="absolute arial bold" style="right: 13px;top: 9px;">{$clickThisMonth.percent|number_format:2}%</span>
+			<a href="#" class="absolute tooltip" title="The number of monthly clicks your ad receives. The percentage shows the sum of Clicks This Month divided by KPI multiplied by 100.
+" style=" bottom: 5px;right: 10px;"></a>
+		</div>
+		<div class="summary-box-small2 flLeft relative">
+			<span class="arial" style="font-size:12px">Current CTR</span><br>
+			<span  style="font-size:28px">{$ctrFromStart.ctr|number_format:2}%</span>
+			<span class="absolute arial bold" style="right: 13px;top: 9px;">{if $ctrFromStart.percent > 0}+{/if}{$ctrFromStart.percent|number_format:2}%</span>
+			<a href="#" class="absolute tooltip" title="The current Clickthrough Rate (CTR) percentage (the sum of the number of clicks your ad receives divided by the impressions multiplied by 100). The number shows the sum of new day’s data divided by the previous day’s data.
+The percentage shown in the top right is the sum of current CTR minus the CTR Target.
+" style=" bottom: 5px;right: 10px;"></a>
+		</div>
+		<div class="summary-box-small2 flRight relative">
+			<span class="arial" style="font-size:12px">Impact on Online Asset</span><br>
+			{if $impact}<span  style="font-size:28px">{$impact}%</span>{else}<span  style="font-size:20px">Data Not Available</span>{/if}
+			<a href="#" class="absolute tooltip" title="The percentage of the sum of total paid search divided by total traffic since the campaign started." style=" bottom: 5px;right: 10px;"></a>
+		</div>
+	</div>
+	<div class="body-box-summary-small flRight relative" style="margin-right:-7px; z-index:1;">
+		<span class="flLeft" style="font-size:14px;margin-left:2px;margin-bottom: 12px;width:300px;">BUDGET</span>
+		<div class="summary-box-small2 flLeft relative">
+			<span class="arial" style="font-size:12px">Current CPC</span><br>
+			<span class="absolute" style="top:28px;left:10px;">USD</span>
+			<span  style="font-size:28px;margin-left:35px;">{$costThisMonth.cost}</span>
+			<span class="absolute arial bold" style="right: 13px;top: 9px;">{if $costThisMonth.percent > 0}+{/if}{$costThisMonth.percent|number_format:2}%</span>
+			<a href="#" class="absolute tooltip" title="The sum of the Cost divided by the Clicks from the previous day (in USD).
+The percentage shows the sum of the Cost divided by the Clicks minus CPC Target.
+" style=" bottom: 5px;right: 10px;"></a>
+		</div>
+		<div class="summary-box-small2 flRight relative">
+			<span class="arial" style="font-size:12px">Spent to Date</span><br>
+			<span class="absolute" style="top:28px;left:10px;">USD</span>
+			<span  style="font-size:28px;margin-left:35px;">{$costFromStart.cost|number_format:2}</span>
+			<span class="absolute arial bold" style="right: 13px;top: 9px;">{$costFromStart.percent|number_format:2}%</span>
+			<a href="#" class="absolute tooltip" title="The total cost spent since the campaign started to date (in USD).
+The percentage shows the sum of the total cost spent divided by the total budget  multiplied by 100." style=" bottom: 5px;right: 10px;"></a>
+		</div>
+		<div class="summary-box-med2 flLeft relative">
+			<span style="font-size:12px" class="arial">Remaining</span><br>
+			<span class="absolute" style="top:28px;left:10px;">USD</span>
+			<span  style="font-size:28px;margin-left:35px;">{$costFromStart.budget|number_format:2}</span>
+			<a href="#" class="absolute tooltip" title="The remaining budget left to spend (in USD)." style=" bottom: 5px;right: 10px;"></a>
+		</div>
+	</div>
+	<span class="relative" style="font-size:14px;margin-left:2px;width: 900px;display: block;z-index:0;">
+		<span class="relative">
+		CLICK PERFORMANCE
+		<a href="#" class="absolute tooltip" title="This chart shows the comparative fluctuations of Clicks and KPI." style="bottom: 2px;right: -20px;"></a>
+		</span>
+	</span>
+	<div id="clicks" style="height: 292px;margin: 15px 0;"></div>
+	<span class="relative" style="font-size:14px;margin-left:2px; width: 300px;display: block;">
+		<span class="relative">
+			CLICK VS. CPC
+			<a href="#" class="absolute tooltip" title="This chart shows the comparative fluctuations of Clicks and Cost-Per-Click (CPC)." style="bottom: 2px;right: -20px;"></a>
+		</span>
+		<div class="absolute" style="top:-330px;right: -650px;">
+			<span class="legend-green arial">Clicks</span>
+			<span class="legend-orange arial">KPI</span>
+		</div>
+		<div class="absolute" style="top:0;right: -650px;">
+			<span class="legend-green arial">Clicks</span>
+			<span class="legend-orange arial">CPC</span>
+		</div>
+	</span>
+	<div id="clickvscpc" style="height: 292px;margin: 15px 0;"></div>
+	<div style="height: 325px;">
+		<span class="relative" style="font-size:14px;margin-left:2px;width: 470px;display: block;margin-bottom:15px;">
+			CONSOLIDATED CTR PERFORMANCE
+			<a href="#" class="absolute tooltip" title="This chart shows the comparative fluctuations of CTR and CTR Target(in percentage)." style="bottom: 2px;right: 185px;"></a>
+			<div class="absolute" style="top:0;right: 25px;">
+				<span class="legend-blue arial">CTR</span>
+				<span class="legend-orange arial">CTR Target</span>
+			</div>
+		</span>
+		<div id="ctrperday" class="flLeft" style="width: 470px; height: 292px;margin: 0 0 20px 0;"></div>
+		<span class="relative flRight" style="font-size:14px;margin-left:2px;margin-top: -33px;width: 468px;display: block;margin-bottom:15px;">
+			SEARCH VS. DISPLAY CTR COMPARISON
+			<a href="#" class="absolute tooltip" title="This chart shows the comparisons between total Clicks and CTR on each Display and Search Network." style="bottom: 2px;right: 160px;"></a>
+			<div class="absolute" style="right: 8px;top: 0;">
+				<span class="legend-blue arial">Clicks</span>
+				<span class="legend-orange arial">CTR</span>
+			</div>
+		</span>
+		<div id="searchdisplay" class="flRight" style="width: 470px; height: 292px;margin: 0 0 20px 0;"></div>
+	</div>
+	<div style="height: 355px;">
+		<span class="relative" style="font-size:14px;margin-left:2px;width: 470px;display: block;margin-bottom:15px;">
+			EXPENDITURE PERFORMANCE
+			<a href="#" class="absolute tooltip" title="This chart shows the comparative fluctuations of Cost per Day and Daily Budget." style="bottom: 2px;right: 230px;"></a>
+			<div class="absolute" style="top:18px;right: 10px;">
+				<span class="legend-ungu arial">Cost per Day</span>
+				<span class="legend-orange arial">Daily Budget</span>
+			</div>
+		</span>	
+		<div id="expenditure" class="flLeft" style="width: 470px; height: 292px;margin: 0 0 20px 0;"></div>
+		<span class="relative flRight" style="font-size:14px;margin-left:2px;margin-top: -33px;width: 468px;display: block;margin-bottom:15px;">
+			CAMPAIGN TO ASSET PERFORMANCE
+			<a href="#" class="absolute tooltip" title="This chart shows the comparative fluctuations of Paid Search and All Traffic." style="bottom: 2px;right: 184px;"></a>
+			<div class="absolute" style="top:0;right: 8px;">
+				<span class="legend-ungu arial">Paid Search</span>
+				<span class="legend-orange arial">All Traffic</span>
+			</div>
+			<div id="nodata_asset" class="absolute" style="z-index: 10;left: 110px;top: 205px;display:none;">
+				<span style="font-size:28px" class="fwhite">Data Not Available</span>
+			</div>
+		</span>
+		<div id="weeklyStats" class="flRight" style="width: 470px; height: 292px;margin: 0 0 20px 0;"></div>
+	</div>
+	<div class="relative" style=" height: 285px;margin: 15px 0 0;">
+		<table style="padding: 0;font-size: 11px; width:468px;" class="body-tbl flLeft contentLeft  fgrey2">
+		<tbody>
+		<tr>
+			<th style="border-top: 0;font-size: 14px;text-align: left;" colspan="11" class="fgrey">
+				TOP 10 ADS
+			</th>
+		</tr>
+		<tr >
+			<th>ADS NAME</th>
+			<th>CLICKS</th>
+		</tr>
+		{section name=i loop=$topAds}
+		<tr><td>{$topAds[i].ads}</td><td>{$topAds[i].klik|number_format}</td></tr>
+		{/section}
+		</tbody>
+	</table>
+	<table style="padding: 0;font-size: 11px; width:468px;" class="body-tbl flRight contentLeft fgrey2">
+		<tbody>
+		<tr>
+			<th style="border-top: 0;font-size: 14px;text-align: left;" colspan="11" class="fgrey">
+				TOP 10 KEYWORDS
+			</th>
+		</tr>
+		<tr >
+			<th>KEYWORDS NAME</th>
+			<th>CLICKS</th>
+		</tr>
+		{section name=i loop=$topKey}
+		<tr><td>{$topKey[i].keyword}</td><td>{$topKey[i].klik|number_format}</td></tr>
+		{/section}
+		</tbody>
+	</table>
+	</div>
+</div>

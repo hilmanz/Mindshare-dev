@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/mindshare-dashboard/!svn/ver/16/trunk/tools/ytapiclass
+END
+curl_class.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/mindshare-dashboard/!svn/ver/16/trunk/tools/ytapiclass/curl_class.php
+END
+ClassYouTubeAPI.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/mindshare-dashboard/!svn/ver/16/trunk/tools/ytapiclass/ClassYouTubeAPI.php
+END
+index.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/mindshare-dashboard/!svn/ver/16/trunk/tools/ytapiclass/index.php
+END

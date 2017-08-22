@@ -1,0 +1,640 @@
+<script type="text/javascript">
+	var page = "project";
+	var page_detail = "seo";
+	var kpi = {$kpi};
+	var kpiPerHari = {$kpiHari};
+	var views = {$view};
+	var so = {$so};
+	var channelChart = {$channelChart};
+	var countries = {$countries};
+	var gender = {$getTopGender};
+	var age = {$getTopAge};
+	{literal}
+		function subscriberChart(filter){
+			_category = [];
+			_subscribe = [];
+			if (so != null){
+				if(filter == 'week'){
+					var weeks = 0;var valWeeks = 0;var mod = 0;var init = 0;
+					if (so.length > 7){
+						mod = so.length%7;
+						if (mod != 0){
+							for (var i=init;i<mod;i++){
+								var year = (so[i].date).substr(0,4);
+								var month = (so[i].date).substr(5,2);
+								var tgl = (so[i].date).substr(8,2);
+								_category.push(tgl+"/"+month+"/"+year);
+								_subscribe.push(parseInt(so[i].subscribe));
+								init++;
+							}
+						}
+						for (var i=init;i<so.length;i++){
+							valWeeks += parseInt(so[i].subscribe);
+							weeks++;
+							if (weeks == 7){
+								var year = (so[i].date).substr(0,4);
+								var month = (so[i].date).substr(5,2);
+								var tgl = (so[i].date).substr(8,2);
+								_category.push(tgl+"/"+month+"/"+year);
+								_subscribe.push(parseInt(so[i].subscribe));
+								weeks = 0;
+								valWeeks = 0;
+							}		
+						}
+						
+					}else{
+						for (var i=0;i<so.length;i++){
+							var year = (so[i].date).substr(0,4);
+							var month = (so[i].date).substr(5,2);
+							var tgl = (so[i].date).substr(8,2);
+							_category.push(tgl+"/"+month+"/"+year);
+							_subscribe.push(parseInt(so[i].subscribe));
+						}
+					}
+				}else if(filter == 'month'){
+					var moonVal = 0;
+					var batas = so.length - 1;
+					var dataL = so.length;
+					var d = new Date((so[0].date));
+					var	moon = d.getMonth()+1;
+					for (var i=0;i<dataL;i++){
+						var monthz = (so[i].date).substr(5,2);					
+						if (Math.abs(monthz) != moon){
+							_category.push(tgl+"/"+month+"/"+year);
+							_subscribe.push(moonVal);
+							moonVal = 0;
+							moon += 1;
+						}
+						var year = (so[i].date).substr(0,4);
+						var month = (so[i].date).substr(5,2);
+						var tgl = (so[i].date).substr(8,2);
+						moonVal +=  parseInt(so[i].subscribe);
+					
+						if(batas == i){
+							_category.push(tgl+"/"+month+"/"+year);
+							_subscribe.push(moonVal);
+							moonVal = 0;
+						}
+					}
+				}else{
+					for (var i=0;i<so.length;i++){
+						var year = (so[i].date).substr(0,4);
+						var month = (so[i].date).substr(5,2);
+						var tgl = (so[i].date).substr(8,2);
+						_category.push(tgl+"/"+month+"/"+year);
+						_subscribe.push(parseInt(so[i].subscribe));
+					}
+				}
+			}
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'subscribe',
+					type: 'line',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},
+				title: false,
+				subtitle: false,
+				xAxis: {
+					categories: _category,
+					labels: {
+					formatter: function() {
+						return (so.length > 12 ? '' : this.value);
+					}
+				}
+				},
+				yAxis: {
+					title:false,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					formatter: function() {
+							return '<b>'+ this.series.name +'</b><br/>'+
+							this.x +': '+ Highcharts.numberFormat(this.y,0);
+					}
+				},
+				legend: false,
+				credits: false,
+				series: [{
+					name: 'YouTube',
+					color: '#a864a8',
+					data: _subscribe
+				}]
+			});
+		}
+		function viewsChart(filter){
+			_category = [];
+			_views = [];
+			_kpi= [];
+			
+			if (views != null){
+				if(filter == 'week'){
+					var weeks = 0;var valWeeks = 0;var mod = 0;var init = 0;
+					if (views.length > 7){
+						mod = views.length%7;
+						if (mod != 0){
+							for (var i=init;i<mod;i++){
+								var year = (views[i].date).substr(0,4);
+								var month = (views[i].date).substr(5,2);
+								var tgl = (views[i].date).substr(8,2);
+								_category.push(tgl+"/"+month+"/"+year);
+								_views.push(parseInt(views[i].views));
+								_kpi.push(kpiPerHari);
+								init++;
+							}
+						}
+						for (var i=init;i<views.length;i++){
+							valWeeks += parseInt(views[i].views);
+							weeks++;
+							if (weeks == 7){
+								var year = (views[i].date).substr(0,4);
+								var month = (views[i].date).substr(5,2);
+								var tgl = (views[i].date).substr(8,2);
+								_category.push(tgl+"/"+month+"/"+year);
+								_views.push(valWeeks);
+								_kpi.push(kpiPerHari*7);
+								weeks = 0;
+								valWeeks = 0;
+							}		
+						}
+						
+					}else{
+						for (var i=0;i<views.length;i++){
+							var year = (views[i].date).substr(0,4);
+							var month = (views[i].date).substr(5,2);
+							var tgl = (views[i].date).substr(8,2);
+							_category.push(tgl+"/"+month+"/"+year);
+							_views.push(parseInt(views[i].views));
+							_kpi.push(kpiPerHari);
+						}
+					}
+				}else if(filter == 'month'){
+				
+					var moonVal = 0;
+					var batas = views.length - 1;
+					var dataL = views.length;
+					var d = new Date((views[0].date));
+					var	moon = d.getMonth()+1;
+				
+					for (var i=0;i<dataL;i++){
+						var monthz = (views[i].date).substr(5,2);					
+						if (Math.abs(monthz) != moon){
+							_category.push(tgl+"/"+month+"/"+year);
+							_views.push(parseInt(moonVal));
+							_kpi.push(kpiPerHari*30);
+							moonVal = 0;
+							moon += 1;
+						}
+						var year = (views[i].date).substr(0,4);
+						var month = (views[i].date).substr(5,2);
+						var tgl = (views[i].date).substr(8,2);
+						moonVal +=  parseInt(views[i].views);
+						if(batas == i){
+							_category.push(tgl+"/"+month+"/"+year);
+							_views.push(parseInt(moonVal));
+							_kpi.push(kpiPerHari*30);
+							moonVal = 0;
+						}
+						
+					}
+					
+				
+				}else{
+					for (var i=0;i<views.length;i++){
+							var year = (views[i].date).substr(0,4);
+							var month = (views[i].date).substr(5,2);
+							var tgl = (views[i].date).substr(8,2);
+							_category.push(tgl+"/"+month+"/"+year);
+							_views.push(parseInt(views[i].views));
+							_kpi.push(kpiPerHari);
+						}
+				}
+				
+			}
+			
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'views',
+					zoomType: 'xy',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},
+				title: false,
+				subtitle: false,
+				xAxis: {
+					categories: _category,
+					labels: {
+					formatter: function() {
+						return (views.length > 12 ? '' : this.value);
+					}
+				}
+				},
+				yAxis: {
+					title:false,
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					formatter: function() {
+							return '<b>'+ this.series.name +'</b><br/>'+
+							this.x +': '+ this.y;
+					}
+				},
+				legend: false,
+				credits: false,
+				series: [{
+					type: 'column',
+					name: 'KPI',
+					color: '#f26522',
+					data: _kpi
+				}, {
+					type: 'spline',
+					name: 'Views',
+					color: '#75f222',
+					data: _views
+				}]
+			});
+		}
+	
+		var chart;
+		$(document).ready(function() {
+			
+			// VIEWS CHART
+			filter = 'day';
+			viewsChart(filter);
+			$(".vday").addClass("vactive");
+			$(".vmonth").click(function(){
+				filter = 'month';
+				viewsChart(filter);
+				$("a.vweek,a.vday").removeClass("vactive");
+				$(this).addClass("vactive");
+			});
+			$(".vweek").click(function(){
+				filter = 'week';
+				viewsChart(filter);
+				$("a.vday,a.vmonth").removeClass("vactive");
+				$(this).addClass("vactive");
+			});
+			$(".vday").click(function(){
+				filter = 'day';
+				viewsChart(filter);
+				$("a.vweek, a.vmonth").removeClass("vactive");
+				$(this).addClass("vactive");
+			});
+			
+			//TOP COUNTRIES
+			_countries = [];
+			if (countries != null){
+				for (var i=0;i<countries.length;i++){
+					_countries.push(countries[i]);
+				}
+			}
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'topCountries',
+					zoomType: 'xy',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},
+				title: false,
+				tooltip: {
+					formatter: function() {
+						return '<b>'+ this.point.name +'</b>: '+ this.y +' views';
+					}
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							color: '#ffffff',
+							connectorColor: '#666666',
+							formatter: function() {
+								return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.percentage,2) +' %';
+							}
+						}
+					}
+				},
+				credits: false,
+				series: [{
+					type: 'pie',
+					name: 'Top Countries',
+					data: _countries
+				}]
+			});
+			
+			//Channel Chart
+			_channelChart = [];
+			if (channelChart != null){
+				for (var i=0;i<channelChart.length;i++){
+					_channelChart.push(channelChart[i]);
+				}
+			}
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'channelChart',
+					zoomType: 'xy',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},
+				title: false,
+				tooltip: {
+					formatter: function() {
+						return '<b>'+ this.point.name +'</b>: '+ this.y +' views';
+					}
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							color: '#ffffff',
+							connectorColor: '#666666',
+							formatter: function() {
+								return '<b>'+ this.point.name +'</b>:<br> '+ Highcharts.numberFormat(this.percentage,2) +' %';
+							}
+						}
+					}
+				},
+				credits: false,
+				series: [{
+					type: 'pie',
+					name: 'Top Countries',
+					data: _channelChart
+				}]
+			});
+			
+			//Gender
+			_genderChart = [];
+			if (gender != null){
+				for (var i=0;i<gender.length;i++){
+					_genderChart.push(gender[i]);
+				}
+			}
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'gender',
+					zoomType: 'xy',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},
+				title: false,
+				tooltip: {
+					formatter: function() {
+						return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.percentage,2) +' %';
+					}
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							color: '#ffffff',
+							connectorColor: '#666666',
+							formatter: function() {
+								return '<b>'+ this.point.name +'</b>:<br> '+ Highcharts.numberFormat(this.percentage,2) +' %';
+							}
+						}
+					}
+				},
+				credits: false,
+				series: [{
+					type: 'pie',
+					name: 'Top Countries',
+					data: _genderChart
+				}]
+			});
+			
+			//Age
+			_ageChart = [];
+			if (age != null){
+				for (var i=0;i<age.length;i++){
+					_ageChart.push(age[i]);
+				}
+			}
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'age',
+					zoomType: 'xy',
+					backgroundColor: false,
+					marginTop: 30,
+					marginLeft: 55,
+					marginBottom: 40,
+					marginRight: 25
+				},
+				title: false,
+				tooltip: {
+					formatter: function() {
+						return '<b>Age '+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.percentage,2) +' %';
+					}
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							color: '#ffffff',
+							connectorColor: '#666666',
+							formatter: function() {
+								return '<b>Age '+ this.point.name +'</b>:<br> '+ Highcharts.numberFormat(this.percentage,2) +' %';
+							}
+						}
+					}
+				},
+				credits: false,
+				series: [{
+					type: 'pie',
+					name: 'Top Age',
+					data: _ageChart
+				}]
+			});
+			
+			//SUBSCRIBE OVERTIME
+			filter2 = 'day'
+			subscriberChart(filter2);
+			$(".sday").addClass("sactive");
+			$(".smonth").click(function(){
+				filter2 = 'month';
+				subscriberChart(filter2);
+				$("a.sweek,a.sday").removeClass("sactive");
+				$(this).addClass("sactive");
+			});
+			$(".sweek").click(function(){
+				filter2 = 'week';
+				subscriberChart(filter2);
+				$("a.sday,a.smonth").removeClass("sactive");
+				$(this).addClass("sactive");
+			});
+			$(".sday").click(function(){
+				filter2 = 'day';
+				subscriberChart(filter2);
+				$("a.sweek,a.smonth").removeClass("sactive");
+				$(this).addClass("sactive");
+			});
+			
+			{/literal}
+				//initial Date
+				var startD = "{$startD}";
+				var endD = "{$endD}";
+				var min7 = new Date("{$min7}");
+				var startDate = new Date("{$startDate}");
+				var currDate = new Date("{$currDate}");
+			{literal}
+				function mdy(x){
+					return (x.getMonth()+1)+"/"+x.getDate()+"/"+x.getFullYear();
+				}
+				if( startD == "//" && endD == "//"){
+					$("#from").val(mdy(min7));
+					$("#to").val(mdy(currDate));
+				}else if(startD == "//" && endD != "//"){
+					$("#from").val(mdy(startDate));
+					$("#to").val(endD);
+				}else if(startD != "//" && endD == "//"){
+					$("#from").val(startD);
+					$("#to").val(mdy(currDate));
+				}else{
+					$("#from").val(startD);
+					$("#to").val(endD);
+				}
+				$("#from, #to").datepicker({ minDate: startDate, maxDate: currDate });
+				$("#from, #to").datepicker("option", "dateFormat", "dd/mm/yy" );
+		});
+	{/literal}
+</script>
+<div id="body-tab">
+	{if $tabSEO eq 1}<a href="#" class="body-tab inblock bTabActive">SEO</a>{/if}
+	{if $tabSEM eq 1}<a href="#" class="body-tab inblock bTabActive">SEM</a>{/if}
+	{if $tabSOCIAL eq 1}<a href="#" class="body-tab inblock bTabActive">SOCIAL</a>{/if}
+</div>
+<div class="body-content" style="height: 1550px;">
+	<div class="body-content-head relative">
+		<span class="flLeft" style="font-size:14px;">SUMMARY REPORT</span>
+		<div class="absolute" style="right: 235px; top: 0px;">
+				<div id="seoDate" class="dropdown2 flRight fgrey arial relative">		
+					<form action="index.php?s=seo&id={$id}" method="post">
+						<span class="absolute" style="left: -60px;top: 10px;">Duration:</span>
+						<input type="text" id="from" name="from" class="absolute">		
+						<input type="text" id="to" name="to" class="absolute" style="left:111px">
+						<input type="hidden" id="rangeDate" name="rangeDate" class="fLeft" value="1">
+						<input id="semDuration" type="submit" class="absolute" value="">
+					</form>
+				</div>
+			</div>
+		<div id="seoDropdown" class="dropdown flRight fgrey arial relative">
+			<span>SUMMARY REPORT</span>
+			<div id="seoList" class="dropdown-bg absolute transparent hide" style="top:6px;left:5px;">
+				<a class="dropdown-item" href="index.php?s=seo&id={$projectID}">SUMMARY REPORT</a>
+				<hr>
+				<a class="dropdown-item" href="index.php?s=seo&id={$projectID}&act=detail">DETAIL REPORT</a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	{literal}
+		$("#seoDropdown").click(function(){
+			effect();
+		});
+		function effect(){
+			$("#seoList").toggle("blind",300);
+		}
+	{/literal}
+	</script>
+	<div class="body-box-summary">
+		<div class="summary-box-med marginR flLeft" style="margin-top:0;">
+			<span class="arial" style="font-size:12px">Total KPI Achievement</span><br>
+			<span class="fcyan" style="font-size:28px">{$kpiTotal}%</span>
+		</div>
+		<div class="summary-box-med flLeft" style="margin-top:0;">
+			<span class="arial" style="font-size:12px">Hits From Organic Search</span><br>
+			<span class="fcyan" style="font-size:28px">{$totalHits.totalHits|number_format}</span>
+		</div>
+		<div class="summary-box-med marginR flLeft">
+			<span class="arial" style="font-size:12px">Top Channel</span><br>
+			<span class="fcyan" style="font-size:28px"></span>
+			<span class="fcyan" style="font-size:20px">{$top_channel.playback_location} ({$top_channel.persen}%)</span>
+		</div>
+		<div class="summary-box-med flLeft">
+			<span class="arial" style="font-size:12px">Top Country</span><br>
+			<span class="fcyan" style="font-size:28px">{$topCountry.country} </span>
+			<span class="fgrey2" style="font-size:28px">: {$topCountry.views|number_format}</span>
+		</div>
+	</div>
+	<span class="relative" style="font-size:14px;margin-left:2px;width: 300px;display: block;">
+		VIEWS
+		<div class="absolute" style="top:0;right: -659px;">
+			<span class="legend-green arial">Actual</span>
+			<span class="legend-orange arial">KPI</span>
+		</div>
+		<div class="absolute" style="top:0;right: -500px;">
+			<a class="vday arial">Day</a>
+			<a class="vweek arial">Week</a>
+			<a class="vmonth arial">Month</a>	
+		</div>
+	</span>
+	<div id="views" class="body-chart-big"></div>
+	<span class="relative flLeft" style="font-size:14px;margin-left:2px; width:487px">
+		TOP COUNTRIES
+		{*}
+		<div class="absolute" style="top:0;right: 17px;">
+			<span class="legend-ungu arial">Actual</span>
+		</div>
+		{/*}
+	</span>
+	<span class="relative flLeft" style="font-size:14px;margin-left:2px;">
+		TOP CHANNEL
+		{*}
+		<div class="absolute" style="top: 0pt; width: 110px; right: -365px;">
+			<span class="legend-blue arial">Actual</span>
+			<span class="legend-orange arial">KPI</span>
+		</div>
+		{/*}
+	</span>
+	<div id="topCountries" class="body-chart-small flLeft" style="margin-right: 13px;"></div>
+	<div id="channelChart" class="body-chart-small flLeft" style="width: 480px;margin-right: -7px;"></div>
+	<span class="relative flLeft" style="font-size:14px;margin-left:2px; width:487px">
+		GENDER
+	</span>
+	<span class="relative flLeft" style="font-size:14px;margin-left:2px;">
+		AGE
+	</span>
+	<div id="gender" class="body-chart-small flLeft" style="margin-right: 13px;"></div>
+	<div id="age" class="body-chart-small flLeft" style="width: 480px;margin-right: -7px;"></div>
+	<span class="relative flLeft" style="font-size:14px;margin-left:2px;width: 300px;display: block;">
+		SUBSCRIBERS OVERTIME
+		<div class="absolute" style="top:0;right: -659px;">
+			<span class="legend-ungu arial">YouTube</span>
+		</div>
+		<div class="absolute" style="right: -530px;top: -2px;">
+			<a class="sday arial">Day</a>
+			<a class="sweek arial">Week</a>
+			<a class="smonth arial">Month</a>	
+		</div>
+	</span>
+	<div id="subscribe" class="body-chart-big flLeft" style="margin-right:-10px"></div>
+</div>

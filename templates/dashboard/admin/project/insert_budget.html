@@ -1,0 +1,28 @@
+<h3>Insert Budget</h3>
+{if $msg}<p><font color="#FF0000">{$msg}</font></p>{/if}{if $ok}<p><font color="#00CC00">{$ok}</font></p>{/if}
+<form method="post" name="fbudget">
+<input name="save" type="hidden" value="1">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="list">
+  <tr>
+    <td width="12%" class="head"><strong>Project</strong></td>
+    <td width="88%"><label for="project"></label>
+      <select name="project" id="project">
+        <option value="0">Select Project</option>
+        {if $plist}
+        {section name=i loop=$plist}
+         <option value="{$plist[i].id}" {if $project=='$plist[i].id'}selected{/if}}>{$plist[i].username} - {$plist[i].name}</option>
+        {/section}
+        {/if}
+      </select></td>
+  </tr>
+  <tr>
+    <td class="head"><strong>Budget</strong></td>
+    <td><label for="budget"></label>
+      <input type="text" name="budget" id="budget" value="{$budget}"></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="submit" id="submit" value="Save"></td>
+  </tr>
+</table>
+</form>

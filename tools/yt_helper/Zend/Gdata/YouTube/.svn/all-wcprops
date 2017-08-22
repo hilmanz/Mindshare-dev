@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube
+END
+VideoFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/VideoFeed.php
+END
+VideoQuery.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/VideoQuery.php
+END
+MediaEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/MediaEntry.php
+END
+InboxEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/InboxEntry.php
+END
+InboxFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/InboxFeed.php
+END
+SubscriptionEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/SubscriptionEntry.php
+END
+SubscriptionFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/SubscriptionFeed.php
+END
+PlaylistVideoEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/PlaylistVideoEntry.php
+END
+PlaylistVideoFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/PlaylistVideoFeed.php
+END
+ContactEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/ContactEntry.php
+END
+ActivityEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/ActivityEntry.php
+END
+PlaylistListEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/PlaylistListEntry.php
+END
+ContactFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/ContactFeed.php
+END
+ActivityFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/ActivityFeed.php
+END
+PlaylistListFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/PlaylistListFeed.php
+END
+UserProfileEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/UserProfileEntry.php
+END
+CommentEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/CommentEntry.php
+END
+CommentFeed.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/CommentFeed.php
+END
+VideoEntry.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/mindshare-dashboard/!svn/ver/24/trunk/tools/yt_helper/Zend/Gdata/YouTube/VideoEntry.php
+END
